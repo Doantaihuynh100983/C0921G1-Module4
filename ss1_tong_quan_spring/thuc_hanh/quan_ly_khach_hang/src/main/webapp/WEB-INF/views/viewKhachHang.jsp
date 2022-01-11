@@ -11,14 +11,15 @@
     <title>Title</title>
 </head>
 <body>
-<form>
+<form method="post" action="/updateKhachHang">
     <fieldset>
         <legend>Customer Information</legend>
         <table>
             <tr>
                 <td>Id</td>
                 <td>
-                    ${khachHang.id}
+                    <input type="text" name="id" value="${khachHang.id}">
+
                 </td>
             </tr>
             <tr>
@@ -41,7 +42,7 @@
             </tr>
             <tr>
                 <td colspan="2">
-                    <input type="submit" value="Update">
+                    <button  type="submit" value="Update">Update</button>
                 </td>
             </tr>
         </table>

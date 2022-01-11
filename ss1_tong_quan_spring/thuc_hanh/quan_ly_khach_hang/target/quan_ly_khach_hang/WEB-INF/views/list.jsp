@@ -28,7 +28,7 @@
         <td>${kh.adress}</td>
         <td>
             <a type="button" class="btn btn-success" href="/deleteKhachHang/${kh.id}">Delete</a>
-            <a type="button" class="btn btn-success">Update</a>
+            <a type="button" class="btn btn-success" href="/viewkhachhang/${kh.id}">Update</a>
         </td>
     </tr>
     </c:forEach>

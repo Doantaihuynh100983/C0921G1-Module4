@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import vn.codegym.model.KhachHang;
 import vn.codegym.service.IKhachHangService;
@@ -39,6 +40,14 @@ public class KhachHangController {
         return "redirect:/khachhang";
     }
 
-
+    @PostMapping("updateKhachHang")
+    public String updateKhachHang(
+            @RequestParam int id ,
+            @RequestParam String name ,
+            @RequestParam String email ,
+            @RequestParam String address){
+            iKhachHangService.updateKhachHang(new KhachHang(id , name, email,address));
+        return "redirect:/khachhang";
+    }
 
 }

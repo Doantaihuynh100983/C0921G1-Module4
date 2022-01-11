@@ -32,7 +32,7 @@ public class KhachHangServiceImpl implements IKhachHangService{
 
     @Override
     public void updateKhachHang(KhachHang khachHang) {
-
+        iKhachHangRepository.updateKhachHang(khachHang);
     }
 
 }
