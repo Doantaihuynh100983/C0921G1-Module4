@@ -4,7 +4,7 @@
 
 </head>
 <body>
-<form method="post">
+<form method="post" action="/currency">
     <label for="usd">USD:</label>
     <input type="text" id="usd" name="usd"><br><br>
     <input type="submit" value="Submit">
