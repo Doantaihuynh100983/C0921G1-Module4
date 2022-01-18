@@ -1,0 +1,1 @@
+SELECT * FROM quan_ly_bai_hat.song;

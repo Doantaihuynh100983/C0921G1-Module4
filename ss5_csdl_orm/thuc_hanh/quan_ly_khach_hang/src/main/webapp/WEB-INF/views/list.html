@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Ages</th>
+    </tr>
+    <tr th:each="c : ${customerList}">
+        <td th:text="${c.id}"></td>
+        <td th:text="${c.name}"></td>
+        <td th:text="${c.age}"></td>
+        <td>
+            <a th:href="@{/deleteCustomer/__${c.id}__}">DELETE</a>
+            <a th:href="@{/views/__${c.id}__}">Views</a>
+            <a th:href="@{/viewsEditCustomer/__${c.id}__}">Edit</a>
+        </td>
+
+    </tr>
+</table>
+
+<a href="/viewAddCustomer">Add New Customer</a>
+</body>
+</html>

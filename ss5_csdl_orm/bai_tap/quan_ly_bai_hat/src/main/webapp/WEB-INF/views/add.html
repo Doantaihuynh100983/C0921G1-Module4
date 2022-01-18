@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<form method="post" action="/addNewSong" th:object="${songList}">
+    <label for="tenBaiHat">Tên Bài Hát :</label>
+    <input type="text" id="tenBaiHat" name="tenBaiHat"><br><br>
+    <label for="ngheSiTheHien">Nghệ Sĩ Thể Hiện :</label>
+    <input type="text" id="ngheSiTheHien" name="ngheSiTheHien"><br><br>
+    <label for="theLoaiNhac">Thể Loại Nhạc :</label>
+    <input type="text" id="theLoaiNhac" name="theLoaiNhac"><br><br>
+    <input type="submit" value="Submit">
+</form>
+</body>
+</html>
