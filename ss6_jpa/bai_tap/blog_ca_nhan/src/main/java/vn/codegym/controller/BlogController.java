@@ -1,6 +1,9 @@
 package vn.codegym.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +15,7 @@ import vn.codegym.model.Blog;
 import vn.codegym.service.IBlogService;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class BlogController {
@@ -19,9 +23,14 @@ public class BlogController {
     IBlogService iBlogService;
 
     @GetMapping({"","blog"})
-    public String getAllBlog(Model model){
-        List<Blog> blogList  = iBlogService.getAllList();
-        model.addAttribute("blogList",blogList);
+    public String getAllBlog(Model model, @PageableDefault (size = 5) Pageable pageable , Optional<String> title){
+        Page<Blog> blogList  = iBlogService.getAllList(pageable);
+        if (!title.isPresent()){
+            model.addAttribute("blogList",blogList);
+        }else {
+            model.addAttribute("blogList",iBlogService.findByAuthor(title.get(),pageable));
+        }
+
         return "blog/list";
     }
     @GetMapping({"viewBlog/{id}"})

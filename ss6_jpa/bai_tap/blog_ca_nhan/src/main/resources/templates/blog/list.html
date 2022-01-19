@@ -11,6 +11,10 @@
 <h1 style="color: red" th:text="${msgUpdate}"></h1>
 <h1 style="color: red" th:text="${msgAdd}"></h1>
 
+<form action="/blog">
+    <input type="text" name="title">
+</form>
+
 <div class="container-fluid">
     <div class="row">
     <div class="card col-lg-12" style="width: 18rem;" th:each="blog : ${blogList}">
@@ -53,6 +57,11 @@
         </div>
     </div>
     </div>
+</div>
+<div>
+    <a th:href="@{'/blog'(page=${blogList.number - 1})}" th:if="${blogList.hasPrevious()}">Previous</a>
+    <span th:text="${blogList.number + 1}"></span>/<span th:text="${blogList.totalPages}"></span>
+    <a th:href="@{'/blog'(page=${blogList.number + 1})}" th:if="${blogList.hasNext()}">Next</a>
 </div>
 <h1><a th:href="@{/viewsAddBlog}">ADD NEW BLOG</a></h1>
 </body>

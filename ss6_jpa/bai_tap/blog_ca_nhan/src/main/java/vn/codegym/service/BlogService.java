@@ -1,6 +1,8 @@
 package vn.codegym.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import vn.codegym.model.Blog;
 import vn.codegym.repository.IBLogRepository;
@@ -14,8 +16,13 @@ public class BlogService implements IBlogService{
     @Autowired
     IBLogRepository ibLogRepository;
     @Override
-    public List<Blog> getAllList() {
-        return ibLogRepository.findAll();
+    public Page<Blog> getAllList(Pageable pageable) {
+        return ibLogRepository.findAll(pageable);
+    }
+
+    @Override
+    public Page<Blog> findByAuthor(String title, Pageable pageable) {
+        return ibLogRepository.findByTitleContaining(title,pageable);
     }
 
     @Override
