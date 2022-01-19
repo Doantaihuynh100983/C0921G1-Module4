@@ -12,7 +12,6 @@ import vn.codegym.model.Blog;
 import vn.codegym.service.IBlogService;
 
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 public class BlogController {
@@ -23,13 +22,13 @@ public class BlogController {
     public String getAllBlog(Model model){
         List<Blog> blogList  = iBlogService.getAllList();
         model.addAttribute("blogList",blogList);
-        return "list";
+        return "blog/list";
     }
     @GetMapping({"viewBlog/{id}"})
     public String findById(Model model , @PathVariable int id){
            Blog blog  = iBlogService.findById(id);
             model.addAttribute("blog1",blog);
-            return "view";
+            return "blog/view";
     }
     @GetMapping({"deleteBlog/{id}"})
     public String deleteBlog(@PathVariable int id,  RedirectAttributes redirectAttributes){
@@ -43,7 +42,7 @@ public class BlogController {
     public String viewEditBlog(@PathVariable int id,Model model){
         Blog blog  = iBlogService.findById(id);
         model.addAttribute("blog",blog);
-        return "update";
+        return "blog/update";
     }
 
     @PostMapping("editBlog")
@@ -55,7 +54,7 @@ public class BlogController {
     @GetMapping({"viewsAddBlog"})
     public String viewsAddBlog(Model model){
         model.addAttribute("blog",new Blog());
-        return "add";
+        return "blog/add";
     }
     @PostMapping("addBlog")
     public String addBlog(@ModelAttribute Blog blog,  RedirectAttributes redirectAttributes){
