@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="/addCustomer" method="post" th:object="${customer}">
+    <label for="firstName">Họ :</label>
+    <input type="text" id="firstName" name="firstName"><br><br>
+    <label for="lastName">Tên:</label>
+    <input type="text" id="lastName" name="lastName"><br><br>
+
+    <select name="province">
+        <option disabled selected>Chosse</option>
+        <th:block th:each="p : ${province}" >
+        <option  th:value="${p.id}" th:text="${p.name}"></option>
+        </th:block>
+    </select>
+    <input type="submit" value="Submit">
+</form>
+</body>
+</html>

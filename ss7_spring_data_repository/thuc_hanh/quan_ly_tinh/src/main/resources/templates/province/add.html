@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="/AddProvide" method="post" th:object="${provideList}">
+    <label for="name">Địa Chỉ:</label>
+    <input type="text" id="name" name="name"><br><br>
+    <input type="submit" value="Submit">
+</form>
+</body>
+</html>

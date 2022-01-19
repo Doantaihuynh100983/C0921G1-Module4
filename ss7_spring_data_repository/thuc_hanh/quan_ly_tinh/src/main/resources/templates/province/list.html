@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Tên Tỉnh</th>
+
+    </tr>
+    <tr th:each="p : ${provideList}">
+        <td th:text="${p.id}"></td>
+        <td th:text="${p.name}"></td>
+        <td>
+            <a th:href="@{/viewUpdateProvide/__${p.id}__}">Update</a>
+        </td>
+
+    </tr>
+</table>
+<a th:href="@{/viewAddProvide}">Thêm Mới Địa Chỉ</a>
+</body>
+</html>

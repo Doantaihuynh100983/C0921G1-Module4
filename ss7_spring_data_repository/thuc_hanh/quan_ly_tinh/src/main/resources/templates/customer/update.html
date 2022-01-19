@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="/updateCustomer" method="post" th:object="${customer}">
+    <input type="hidden" id="id" name="id" th:field="*{id}"><br><br>
+    <label for="firstName">Họ :</label>
+    <input type="text" id="firstName" name="firstName" th:field="*{firstName}"><br><br>
+    <label for="lastName">Tên:</label>
+    <input type="text" id="lastName" name="lastName" th:field="*{lastName}"><br><br>
+
+    <select name="province">
+        <option th:each="p : ${province}"
+                th:value="${p.id}"
+                th:text="${p.name}"
+                th:selected="(${customer.province}) and (${p.id} == *{province.id})"></option>
+    </select>
+    <input type="submit" value="Submit">
+</form>
+</body>
+</html>
