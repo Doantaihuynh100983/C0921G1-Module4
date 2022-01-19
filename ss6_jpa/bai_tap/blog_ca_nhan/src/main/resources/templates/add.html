@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="/addBlog" method="post" th:object="${blog}">
+<!--    private String title;-->
+<!--    private String author;-->
+<!--    private Date date;-->
+<!--    private String category;-->
+<!--    private String image;-->
+<!--    private String description;-->
+<!--    private String content;-->
+    <label for="title">Title:</label><br>
+    <input type="text" id="title" name="title"><br><br>
+
+
+    <label for="author">AUTHOR:</label><br>
+    <input type="text" id="author" name="author"><br><br>
+
+    <label for="date">DATE:</label><br>
+    <input type="text" id="date" name="date"><br><br>
+
+    <label for="category">CATEGORY:</label><br>
+    <input type="text" id="category" name="category"><br><br>
+
+
+    <label for="image">IMAGES:</label><br>
+    <input type="text" id="image" name="image"><br><br>
+
+    <label for="description">DESCRIPTION:</label><br>
+    <input type="text" id="description" name="description"><br><br>
+
+    <label for="content">CONTENT:</label><br>
+    <input type="text" id="content" name="content"><br><br>
+
+
+    <input type="submit" value="Submit">
+</form>
+</body>
+</html>

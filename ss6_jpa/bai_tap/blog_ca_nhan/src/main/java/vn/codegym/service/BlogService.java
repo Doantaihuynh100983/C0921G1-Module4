@@ -20,6 +20,16 @@ public class BlogService implements IBlogService{
 
     @Override
     public Blog findById(int id) {
-        return ibLogRepository.findById(id);
+        return ibLogRepository.findById(id).orElse(new Blog());
+    }
+
+    @Override
+    public void deleteBlog(int id) {
+        ibLogRepository.deleteById(id);
+    }
+
+    @Override
+    public void save(Blog blog) {
+        ibLogRepository.save(blog);
     }
 }

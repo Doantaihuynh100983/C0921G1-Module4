@@ -4,5 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import vn.codegym.model.Blog;
 
 public interface IBLogRepository extends JpaRepository<Blog,Integer> {
-    Blog findById(int id);
+
+    void deleteById(int id);
 }
