@@ -11,7 +11,23 @@
 <h1 style="color: red" th:text="${msgUpdate}"></h1>
 <h1 style="color: red" th:text="${msgAdd}"></h1>
 
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">MENU</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item" th:each="p:${category}">
+                    <a class="nav-link active" aria-current="page" th:href="@{/CategoryById/__${p.getId()}__}" th:text="${p.name}"></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 <form action="/blog">
+    <h1>TÌM KIẾM TẠI ĐÂY !!</h1>
     <input type="text" name="title">
 </form>
 

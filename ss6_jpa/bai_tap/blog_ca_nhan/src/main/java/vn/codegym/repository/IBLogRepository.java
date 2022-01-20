@@ -9,4 +9,5 @@ public interface IBLogRepository extends JpaRepository<Blog,Integer> {
 
     void deleteById(int id);
     Page<Blog> findByTitleContaining(String title , Pageable pageable);
+    Page<Blog> findAllByCategoryId(int id , Pageable pageable);
 }

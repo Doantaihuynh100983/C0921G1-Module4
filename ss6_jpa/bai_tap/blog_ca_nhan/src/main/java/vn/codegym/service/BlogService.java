@@ -39,4 +39,9 @@ public class BlogService implements IBlogService{
     public void save(Blog blog) {
         ibLogRepository.save(blog);
     }
+
+    @Override
+    public Page<Blog> findAllByCategoryId(int id, Pageable pageable) {
+        return ibLogRepository.findAllByCategoryId(id,pageable);
+    }
 }
