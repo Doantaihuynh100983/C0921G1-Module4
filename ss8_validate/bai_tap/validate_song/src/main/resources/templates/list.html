@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1 th:text="${msgAdd}"></h1>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Tên Bài Hát</th>
+        <th>Nghệ Sĩ Thể Hiện</th>
+        <th>Thể Loại Nhạc</th>
+    </tr>
+    <tr th:each=" s : ${song}">
+        <td th:text="${s.id}"></td>
+        <td th:text="${s.tenBaiHat}"></td>
+        <td th:text="${s.ngheSiTheHien}"></td>
+        <td th:text="${s.theLoaiNhac}"></td>
+    </tr>
+</table>
+
+<a th:href="@{/viewAddSong}">Add New Song</a>
+</body>
+</html>
