@@ -10,7 +10,7 @@ import vn.codegym.dto.CartDto;
 @Controller
 public class CartController {
     @GetMapping("cart")
-    public String showCart(@SessionAttribute("cart")CartDto cartDto , Model model){
+    public String showCart(@SessionAttribute(name = "cart",required = false)CartDto cartDto , Model model){
         model.addAttribute("cart",cartDto);
         return "cart";
     }
