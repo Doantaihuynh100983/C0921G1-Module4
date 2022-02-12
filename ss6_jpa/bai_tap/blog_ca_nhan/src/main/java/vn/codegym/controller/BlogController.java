@@ -22,7 +22,7 @@ import java.util.Optional;
 @Controller
 public class BlogController {
     @Autowired
-    IBlogService iBlogService;
+    IBlogService iBlogService; 
     @Autowired
     ICategoryService iCategoryService;
     @GetMapping({"","blog"})
