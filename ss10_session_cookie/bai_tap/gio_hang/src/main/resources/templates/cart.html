@@ -20,15 +20,17 @@
     <tr th:each="c : ${cart.productMap}">
         <th scope="row" th:text="${c.key.id}"></th>
         <th scope="row" th:text="${c.key.name}"></th>
-        <th scope="row" th:text="${c.key.images}"></th>
+        <th scope="row" ><img th:src="${c.key.images}" height="50px"></th>
         <th scope="row" th:text="${c.key.price}"></th>
-        <th scope="row" th:text="${c.value}"></th>
-
-
+        <th scope="row" ><input type="number" name="quantity" th:value="${c.value}"></th>
     </tr>
-
     </tbody>
 </table>
+
+
+    <h1>Tổng Tiền</h1>
+    <p th:text="${total}"></p>
+
         <div th:if="${cart == null || cart.getProductMap().size() == 0}">
             <p>Giỏ Hàng Rỗng</p>
         </div>

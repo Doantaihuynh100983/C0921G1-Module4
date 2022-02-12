@@ -1,5 +1,7 @@
 package vn.codegym.dto;
 
+import vn.codegym.model.Product;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,4 +31,13 @@ public class CartDto {
             productMap.put(productDto,1);
         }
     }
+
+    public Float totalProduct(){
+        float total = 0 ;
+        for (Map.Entry<ProductDto, Integer> entry : productMap.entrySet()){
+                total += entry.getValue() * entry.getKey().getPrice();
+        }
+        return total;
+    }
+
 }
