@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class UngDungMuonSachApplication {
+public class QuanLyDienThoaiApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(UngDungMuonSachApplication.class, args);
+        SpringApplication.run(QuanLyDienThoaiApplication.class, args);
     }
 
 }
