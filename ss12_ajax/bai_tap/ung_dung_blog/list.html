@@ -30,24 +30,45 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
+    let totalShow = 2 ;
+    let blogs = []; // lưu mảng về các blog
+
+    // Hàm này dùng để hiển thị (thêm vào cuối danh sách) blog tại vị trí index
+    function pushBlog(index){
+        let tr = [] ;
+        tr.push('<tr>');
+        tr.push('<td>' + blogs[index].id + '</td>');
+        tr.push('<td>' + blogs[index].name + '</td>');
+        tr.push('<td>' + blogs[index].author + '</td>');
+        tr.push('</tr>');
+        $('.table').append($(tr.join('')));
+    }
+
     $(document).ready(function () {
+        // khi load lần đầu, trình duyệt sẽ tải dữ liệu về (chỉ nên tải 1 lần rồi lưu vào biến blogs)
         $.ajax({
             url : "http://localhost:8080/blog",
             type : "GET",
             dataType : "json",
             success : function (data) {
-                let tr = [] ;
-                for (let  i = 0 ; i < 2; i++){
-                    tr.push('<tr>');
-                    tr.push('<td>' + data[i].id + '</td>');
-                    tr.push('<td>' + data[i].name + '</td>');
-                    tr.push('<td>' + data[i].author + '</td>');
-                    tr.push('</tr>');
-                }
-                $('.table').append($(tr.join('')));
+                blogs = data; // lưu dữ liệu tải về vào biến blogs
+                // hiển thị 2 blog đầu tiên (có index là 0 và 1)
+                for (let  i = 0 ; i < 2; i++) pushBlog(i);
             }
         })
     })
+
+
+
+    $(document).ready(function () {
+        $("#loadmore").click(function () {
+            totalShow += 2; // tăng số lượng blog hiển thị lên
+
+            pushBlog(totalShow - 2);
+            pushBlog(totalShow - 1);
+        })
+    })
+
 
 
 
