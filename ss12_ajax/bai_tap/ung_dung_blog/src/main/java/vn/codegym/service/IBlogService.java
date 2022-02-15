@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface IBlogService {
         List<Blog> getAllBlog();
+        List<Blog>  findAllByName(String name);
+
 }

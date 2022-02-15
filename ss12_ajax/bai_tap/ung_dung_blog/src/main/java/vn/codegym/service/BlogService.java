@@ -14,4 +14,9 @@ public class BlogService implements IBlogService{
     public List<Blog> getAllBlog() {
         return iBlogRepository.findAll();
     }
+
+    @Override
+    public List<Blog> findAllByName(String name) {
+        return iBlogRepository.findAllByName(name);
+    }
 }
