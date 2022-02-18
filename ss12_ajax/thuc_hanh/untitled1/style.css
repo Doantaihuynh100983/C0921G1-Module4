@@ -1,0 +1,21 @@
+.menuTest ul li {
+    padding: 0 70px;
+}
+
+.menuTest ul li a {
+    color: aliceblue;
+}
+body{
+    background-image: url('https://pkmacbook.com/wp-content/uploads/2021/06/background-ngoi-sao-xanh_060332945.jpg');
+}
+.rowTest{
+    height: 100px;
+    background: white;
+}
+.rowTest2{
+    height: 100px;
+    background: blue;
+}
+.rowTest button{
+    width: 100%;
+}

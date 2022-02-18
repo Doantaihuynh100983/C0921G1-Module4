@@ -1,14 +1,41 @@
 package vn.codegym.dto;
 
+import vn.codegym.model.CustomerType;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
+
 public class CustomerDto {
+
     private Integer customerId;
+
+//    @NotEmpty(message = "Không dùng dấu cách nhé !!!")
+//    @Pattern(regexp = "^[a-zA-Z]+$", message = "Định Dạng Sai !!")
     private String customerName;
+
     private String customerBirthday;
+
     private Boolean customerGender;
+
+
+//    @NotEmpty(message = "Không dùng dấu cách nhé !!!")
+//    @Pattern(regexp = "^\\d{12}|\\d{9}$", message = "Định Dạng Sai !!")
     private String customerIdCard;
+
+
     private String customerPhone;
+
+
+//    @NotEmpty(message = "Không dùng dấu cách nhé !!!")
+//    @Pattern(regexp = "^\\w+@\\w+[.]\\w+$", message = "Định Dạng Sai !!")
     private String customerEmail;
+
+
+
     private String customerAddress;
+    //adrees với phone chưa validate
+    private CustomerType customerType;
 
     public CustomerDto() {
     }
@@ -87,5 +114,13 @@ public class CustomerDto {
 
     public void setCustomerAddress(String customerAddress) {
         this.customerAddress = customerAddress;
+    }
+
+    public CustomerType getCustomerType() {
+        return customerType;
+    }
+
+    public void setCustomerType(CustomerType customerType) {
+        this.customerType = customerType;
     }
 }

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+<div class="container-fluid">
+    <table class="table table-striped">
+        <tr>
+            <td height="col">ID</td>
+            <td height="col" th:text="${c.customerId}"></td>
+        </tr>
+        <tr>
+            <td height="col">Name</td>
+            <td height="col" th:text="${c.customerName}"></td>
+        </tr>
+        <tr>
+            <td height="col">Birthday</td>
+            <td height="col" th:text="${c.customerBirthday}"></td>
+        </tr>
+        <tr>
+            <td height="col">Gender</td>
+            <td height="col" th:text="${c.customerGender}"></td>
+        </tr>
+        <tr>
+            <td height="col">IdCard</td>
+            <td height="col"  th:text="${c.customerIdCard}"></td>
+        </tr>
+        <tr>
+            <td height="col">Phone</td>
+            <td height="col"  th:text="${c.customerPhone}"></td>
+        </tr>
+        <tr>
+            <td height="col">Email</td>
+            <td height="col" th:text="${c.customerEmail}"></td>
+        </tr>
+        <tr>
+            <td height="col">Address</td>
+            <td height="col"  th:text="${c.customerAddress}"></td>
+        </tr>
+        <tr>
+            <td height="col">Customer Type</td>
+            <td height="col"  th:text="${c.customerType.customerTypeName}"></td>
+        </tr>
+    </table>
+</div>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+<script src="jquery-3.5.1.min.js"></script>
+</html>
