@@ -13,6 +13,10 @@ public interface ICustomerRepository extends JpaRepository<Customer,Integer> {
     void deleteByCustomerId(Integer id);
 
 
-    @Query(value="SELECT * FROM  Customer where customer_name like %:customerName%  and  customer_address like %:customerAdress%", nativeQuery=true)
-    Page<Customer> searchCustomer(@Param("customerName") String customerName,  @Param("customerAdress") String customerAdress,Pageable pagle);
+    @Query(value="SELECT * FROM  Customer where customer_name like concat('%',:customerName,'%') " +
+            " and  customer_address like concat('%',:customerAdress,'%')  and customer_type_id like concat('%',:customerTypeId,'%')", nativeQuery=true)
+    Page<Customer> searchCustomer(@Param("customerName") String customerName,
+                                  @Param("customerAdress") String customerAdress,
+                                  @Param("customerTypeId") String customerTypeId,
+                                  Pageable pagle);
 }

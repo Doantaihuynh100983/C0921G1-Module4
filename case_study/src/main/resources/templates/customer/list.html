@@ -20,19 +20,20 @@
                             <br>
                                 <div class="d-flex bd-highlight">
                                      <div class="p-2 flex-grow-1 bd-highlight">
-                                        <a type="button" class="btn btn-outline-primary " href="/viewAdd">THÊM MỚI NHÂN VIÊN</a>
+                                        <a type="button" class="btn btn-outline-primary " href="/viewAdd">THÊM MỚI KHÁCH HÀNG</a>
                                     </div>
-                                    <form action="">
+                                    <form action="/customer">
 
                                         <div class="d-flex bd-highlight">
                                             <div class="p-2 flex-fill bd-highlight">
-                                                <input type="text" id="customerName" name="customerName" placeholder="Tên Nhân Viên" style="width:200px;height: 38px">
+                                                <input type="text" id="customerName" name="customerName" placeholder="Tên Khách Hàng" style="width:200px;height: 38px">
                                             </div>
                                             <div class="p-2 flex-fill bd-highlight">
                                                 <input type="text" id="customerAddress" name="customerAddress" placeholder="Địa chỉ" style="width:200px;height: 38px"><br><br>
                                             </div>
                                             <div class="p-2 flex-fill bd-highlight">
-                                                <select id="customerType" style="width:200px;height: 38px">
+                                                <select id="customerType" style="width:200px;height: 38px" name="customerType">
+                                                    <option  selected disabled>Loại Khách !</option>
                                                     <option th:each="st : ${customerType}" th:text="${st.customerTypeName}" th:value="${st.customerTypeId}"></option>
                                                 </select>
                                             </div>

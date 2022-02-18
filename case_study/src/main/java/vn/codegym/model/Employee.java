@@ -35,9 +35,6 @@ public class Employee {
     private List<Contract> contract;
 
 
-    @ManyToOne
-    @JoinColumn(name = "userName",referencedColumnName = "userName")
-    private User user;
 
 
 

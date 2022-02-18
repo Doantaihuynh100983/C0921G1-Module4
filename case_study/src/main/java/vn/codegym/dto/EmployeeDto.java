@@ -1,5 +1,9 @@
 package vn.codegym.dto;
 
+import vn.codegym.model.Division;
+import vn.codegym.model.EducationDegree;
+import vn.codegym.model.Position;
+
 public class EmployeeDto {
     private Integer employeeId;
     private String employeeName;
@@ -9,12 +13,18 @@ public class EmployeeDto {
     private String employeePhone;
     private String employeeEmail;
     private String employeeAdress;
+    private Position position;
+    private EducationDegree educationDegree;
+    private Division division;
+
 
     public EmployeeDto() {
     }
 
-    public EmployeeDto(Integer employeeId, String employeeName, String employeeBirthday, String employeeIdCard,
-                       Double employeeSalary, String employeePhone, String employeeEmail, String employeeAdress) {
+    public EmployeeDto(Integer employeeId, String employeeName, String employeeBirthday,
+                       String employeeIdCard, Double employeeSalary, String employeePhone,
+                       String employeeEmail, String employeeAdress,
+                       Position position, EducationDegree educationDegree, Division division) {
         this.employeeId = employeeId;
         this.employeeName = employeeName;
         this.employeeBirthday = employeeBirthday;
@@ -23,6 +33,9 @@ public class EmployeeDto {
         this.employeePhone = employeePhone;
         this.employeeEmail = employeeEmail;
         this.employeeAdress = employeeAdress;
+        this.position = position;
+        this.educationDegree = educationDegree;
+        this.division = division;
     }
 
     public Integer getEmployeeId() {
@@ -87,5 +100,29 @@ public class EmployeeDto {
 
     public void setEmployeeAdress(String employeeAdress) {
         this.employeeAdress = employeeAdress;
+    }
+
+    public Position getPosition() {
+        return position;
+    }
+
+    public void setPosition(Position position) {
+        this.position = position;
+    }
+
+    public EducationDegree getEducationDegree() {
+        return educationDegree;
+    }
+
+    public void setEducationDegree(EducationDegree educationDegree) {
+        this.educationDegree = educationDegree;
+    }
+
+    public Division getDivision() {
+        return division;
+    }
+
+    public void setDivision(Division division) {
+        this.division = division;
     }
 }

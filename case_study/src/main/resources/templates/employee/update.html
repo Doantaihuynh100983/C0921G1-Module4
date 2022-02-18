@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <!--    <link rel="stylesheet" href="css/styleAdd.css">-->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<div th:replace="/layout/nabar::navbar"></div>
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-2" th:replace="/layout/body::menu1">
+        </div>
+        <div class="col-10">
+            <div class="container"> <div class=" text-center mt-5 ">
+                <h1>THÊM MỚI NHÂN VIÊN</h1>
+            </div>
+                <div class="row ">
+                    <div class="content_01">
+                        <div class="col-lg-7 mx-auto" style="width: 100%">
+                            <div class="card mt-2 mx-auto p-4 bg-light">
+                                <div class="card-body bg-light">
+                                    <div class="container">
+                                        <form id="contact-form" role="form" th:object="${employee}" action="/employee/update" method="post">
+                                            <div class="controls">
+                                                <input type="text" th:field="*{employeeId}">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+
+                                                            <label for="employeeName">Name *</label>
+                                                            <input th:field="*{employeeName}"  id="employeeName" type="text" name="employeeName" class="form-control" placeholder="Please enter your Name *" required="required" ></div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="employeeBirthday">Birthday *</label>
+                                                            <input th:field="*{employeeBirthday}" id="employeeBirthday" type="date" name="employeeBirthday" class="form-control"  required="required" > </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="employeeIdCard">ID CARD *</label>
+                                                            <input  th:field="*{employeeIdCard}" id="employeeIdCard" type="text" name="employeeIdCard" class="form-control" placeholder="Please enter your Id Card *" required="required" >
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="employeeSalary">SALARY *</label>
+                                                            <input th:field="*{employeeSalary}" id="employeeSalary" type="text" name="employeeSalary" class="form-control" placeholder="Please enter your Salary *" required="required" >
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="employeePhone">PHONE *</label>
+                                                            <input th:field="*{employeePhone}" id="employeePhone" type="text" name="employeePhone" class="form-control" placeholder="Please enter your Phone *" required="required" > </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="employeeEmail">Email *</label>
+                                                            <input th:field="*{employeeEmail}" id="employeeEmail" type="email" name="employeeEmail" class="form-control" placeholder="Please enter your Email *" required="required" >
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="employeeAdress">ADRESS *</label>
+                                                            <input  th:field="*{employeeEmail}" id="employeeAdress" type="text" name="employeeAdress" class="form-control" placeholder="Please enter your Adress *" required="required" > </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group"> <label >POSITION *</label>
+                                                            <select th:field="*{position}" class="form-control" required="required">
+                                                                <option th:each="ps : ${position}" th:text="${ps.positionName}" th:value="${ps.positionId}"></option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group"> <label for="educationDegree">EDUCATION *</label>
+                                                            <select th:field="*{educationDegree}" id="educationDegree" name="educationDegree" class="form-control" required="required">
+                                                                <option th:each="ed : ${eduction}" th:value="${ed.educationDegreeID}" th:text="${ed.educationDegreeName}"></option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group"> <label for="educationDegree">DIVISION *</label>
+                                                            <select th:field="*{division}" id="division" name="division" class="form-control" required="required">
+                                                                <option th:each="dv : ${division}" th:value="${dv.divisionId}" th:text="${dv.divisionName}"></option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <br>
+                                                <div class="row">
+                                                    <div class="col-lg-12"> <input type="submit" class="btn btn-success btn-send pt-2 btn-block " value="Submit"> </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div> <!-- /.8 -->
+                        </div> <!-- /.row-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+</html>

@@ -26,7 +26,7 @@
                             <div class="card-body bg-light">
                                 <div class="container">
                                     <form id="contact-form" role="form" method="post" action="/updateCustomer" th:object="${customer}">
-                                        <input type="text" th:field="*{customerId}">
+                                        <input type="hidden" th:field="*{customerId}">
                                         <div class="controls">
                                             <div class="row">
                                                 <div class="col-md-6">
@@ -63,8 +63,7 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group"> <label for="customerType">TYPE *</label>
-                                                        <select id="customerType" name="customerType" class="form-control" required="required">
-                                                            <option selected  th:each=" c : ${customerType}"  th:if="${customer.customerType.customerTypeId == c.customerTypeId}" th:text="${c.customerTypeName}" th:value="${c.customerTypeId}"></option>
+                                                        <select th:field="*{customerType}" id="customerType" name="customerType" class="form-control" required="required">
                                                             <option th:each=" c : ${customerType}"  th:text="${c.customerTypeName}" th:value="${c.customerTypeId}"></option>
                                                         </select>
                                                     </div>

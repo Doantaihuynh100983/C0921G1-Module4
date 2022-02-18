@@ -32,16 +32,10 @@ public class CustomerController {
     public String getAllCustomer(Model model ,
                                  @PageableDefault(value = 6)Pageable pageable,
                                  @RequestParam(defaultValue = "") String customerName,
-                                 @RequestParam(defaultValue = "") String  customerAddress){
-                if (!customerName.equals("") || !customerAddress.equals("") ){
-                    model.addAttribute("customer" , iCustomerService.searchCustomer(customerName,customerAddress,pageable));
-                }
-                else {
+                                 @RequestParam(defaultValue = "") String  customerAddress,
+                                 @RequestParam(defaultValue = "") String   customerType){
+                    model.addAttribute("customer" , iCustomerService.searchCustomer(customerName,customerAddress,customerType,pageable));
                     model.addAttribute("customerType" , iCustomerTypeService.getAllCustomerType());
-                    model.addAttribute("customer", iCustomerService.getAllCustomer(pageable));
-
-                }
-
         return "customer/list";
     }
 

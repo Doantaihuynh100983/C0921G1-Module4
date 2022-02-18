@@ -9,8 +9,6 @@ public class User {
     private String userName;
     private String passWord;
 
-    @OneToMany(mappedBy = "user")
-    private List<Employee> employees;
 
 
 }
