@@ -29,4 +29,14 @@ public class EmployeeServiceImpl implements IEmployeeService {
     public Optional<Employee> findByIdEmployee(Integer id) {
         return iEmployeeRepository.findById(id);
     }
+
+    @Override
+    public Page<Employee> seachEmployee(String employeeName,
+                                        String employeeAdress,
+                                        String position,
+                                        String educationDegree,
+                                        String division,
+                                        Pageable pageable) {
+        return iEmployeeRepository.searchEmployee(employeeName,employeeAdress,position,educationDegree,division,pageable);
+    }
 }

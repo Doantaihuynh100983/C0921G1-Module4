@@ -22,7 +22,7 @@
                         <div class="p-2 flex-grow-1 bd-highlight">
                             <a type="button" class="btn btn-outline-primary " href="/employee/viewAdd">THÊM MỚI NHÂN VIÊN</a>
                         </div>
-                        <form action="/customer">
+                        <form action="/employee/list">
 
                             <div class="d-flex bd-highlight">
                                 <div class="p-2 flex-fill bd-highlight">
@@ -33,12 +33,17 @@
                                 </div>
 
                                 <div class="p-2 flex-fill bd-highlight">
-                                    <select id="customerType" style="width:100px;height: 38px" name="position">
+                                    <select id="position" style="width:100px;height: 38px" name="position">
                                         <option selected disabled>Chức Vụ</option>
                                         <option th:each="ps : ${position}" th:text="${ps.positionName}" th:value="${ps.positionId}"></option>
                                     </select>
                                 </div>
-
+                                <div class="p-2 flex-fill bd-highlight">
+                                    <select  style="width:100px;height: 38px" name="educationDegree">
+                                        <option  selected disabled>Bằng Cấp</option>
+                                        <option th:each="eds : ${eduction}" th:text="${eds.educationDegreeName}" th:value="${eds.educationDegreeID}"></option>
+                                    </select>
+                                </div>
                                 <div class="p-2 flex-fill bd-highlight">
                                     <select  style="width:100px;height: 38px" name="division">
                                         <option  selected disabled>Phòng Ban</option>
@@ -46,12 +51,7 @@
                                     </select>
                                 </div>
 
-                                <div class="p-2 flex-fill bd-highlight">
-                                    <select  style="width:100px;height: 38px" name="educationDegree">
-                                        <option  selected disabled>Bằng Cấp</option>
-                                        <option th:each="eds : ${eduction}" th:text="${eds.educationDegreeName}" th:value="${eds.educationDegreeID}"></option>
-                                    </select>
-                                </div>
+
                                 <div class="p-2 flex-fill bd-highlight">
                                     <button type="submit" class="btn btn-outline-primary">TÌM KIẾM</button>
                                 </div>
@@ -100,7 +100,9 @@
                     </tbody>
                 </table>
 
-
+                <a type="button" class="btn btn-primary" th:href="@{'/employee/list'(page = ${employee.number - 1})}" th:if="${employee.hasPrevious()}">Back</a>
+                <span th:text="${employee.number + 1 }"> </span> /   <span th:text="${employee.totalPages}"> </span>
+                <a type="button" class="btn btn-primary" th:href="@{'/employee/list'(page = ${employee.number + 1})}" th:if="${employee.hasNext()}">Next</a>
             </div>
         </div>
     </div>
