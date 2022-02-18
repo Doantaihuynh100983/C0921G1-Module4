@@ -27,7 +27,7 @@ public class EmployeeCotroller {
     IDivisionService iDivisionService;
     @GetMapping("/list")
     public String getAllList(Model model , @PageableDefault(value = 6) Pageable pageable){
-
+            // đang làm phân trang employee đã truyền dữ liệu tới controller đợi đẩy lên views
         model.addAttribute("employee",iEmployeeService.getAllEmployee(pageable));
         model.addAttribute("position", iPositionService.getAllPosition());
         model.addAttribute("eduction",iEducationService.getAllEducation());
@@ -71,5 +71,6 @@ public class EmployeeCotroller {
         iEmployeeService.saveEmployee(employee);
         return "redirect:/employee/list";
     }
+
 
 }
