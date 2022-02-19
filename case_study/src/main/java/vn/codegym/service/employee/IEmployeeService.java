@@ -11,12 +11,13 @@ import java.util.Optional;
 public interface IEmployeeService {
     Page<Employee> getAllEmployee(Pageable pageable);
     Employee saveEmployee(Employee employee);
-    Optional<Employee> findByIdEmployee(Integer id);
+    Employee findByIdEmployee(Integer id);
     Page<Employee> seachEmployee(String employeeName ,
                                  String employeeAdress ,
                                  String position,
                                  String educationDegree,
                                  String division,
                                  Pageable pageable);
+    void deleteByEmployeeId(Integer id);
 
 }

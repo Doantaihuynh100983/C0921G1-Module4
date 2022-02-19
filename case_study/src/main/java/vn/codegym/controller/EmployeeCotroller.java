@@ -37,19 +37,12 @@ public class EmployeeCotroller {
                              @RequestParam(defaultValue = "") String educationDegree ,
                              @RequestParam(defaultValue = "") String division){
         model.addAttribute("employee", iEmployeeService.seachEmployee(employeeName,employeeAdress,position,educationDegree,division,pageable));
-//        model.addAttribute("employee",iEmployeeService.getAllEmployee(pageable));
-//        model.addAttribute("position", iPositionService.getAllPosition());
-//        model.addAttribute("eduction",iEducationService.getAllEducation());
-//        model.addAttribute("division",iDivisionService.getAllDivision());
         return "employee/list";
     }
 
     @GetMapping("/viewAdd")
     public String viewAdd(Model model){
         model.addAttribute("employee", new EmployeeDto());
-//        model.addAttribute("position", iPositionService.getAllPosition());
-//        model.addAttribute("eduction",iEducationService.getAllEducation());
-//        model.addAttribute("division",iDivisionService.getAllDivision());
         return "employee/add";
     }
 
@@ -66,9 +59,6 @@ public class EmployeeCotroller {
     @GetMapping("/viewUpdate/{id}")
     public String viewUpdate(@PathVariable Integer id , Model model){
         model.addAttribute("employee",iEmployeeService.findByIdEmployee(id));
-//        model.addAttribute("position", iPositionService.getAllPosition());
-//        model.addAttribute("eduction",iEducationService.getAllEducation());
-//        model.addAttribute("division",iDivisionService.getAllDivision());
         return "employee/update";
     }
 
@@ -96,4 +86,17 @@ public class EmployeeCotroller {
     }
 
 
+    @GetMapping("/views/{id}")
+    public String views( @PathVariable int id , Model model ){
+        model.addAttribute("e",iEmployeeService.findByIdEmployee(id));
+        return "employee/views";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable int id){
+        iEmployeeService.deleteByEmployeeId(id);
+        return "redirect:/employee/list";
+    }
+
+    // delete đang bị gì chưa xóa được 
 }

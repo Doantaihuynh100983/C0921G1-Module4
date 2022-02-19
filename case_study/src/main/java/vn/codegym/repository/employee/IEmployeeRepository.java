@@ -13,6 +13,7 @@ import vn.codegym.model.Position;
 import java.util.Optional;
 
 public interface IEmployeeRepository extends JpaRepository<Employee,Integer> {
+    void deleteByEmployeeId(Integer id);
 
 
     @Query(value="select * from employee where employee_name like %:employeeName% and employee_adress like %:employeeAdress%  and position_id like %:position% and education_degreeid like %:educationDegree% and division_id like %:division%" ,nativeQuery=true)

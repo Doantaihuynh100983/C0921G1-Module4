@@ -26,8 +26,8 @@ public class EmployeeServiceImpl implements IEmployeeService {
     }
 
     @Override
-    public Optional<Employee> findByIdEmployee(Integer id) {
-        return iEmployeeRepository.findById(id);
+    public Employee findByIdEmployee(Integer id) {
+        return iEmployeeRepository.findById(id).orElse(new Employee());
     }
 
     @Override
@@ -38,5 +38,10 @@ public class EmployeeServiceImpl implements IEmployeeService {
                                         String division,
                                         Pageable pageable) {
         return iEmployeeRepository.searchEmployee(employeeName,employeeAdress,position,educationDegree,division,pageable);
+    }
+
+    @Override
+    public void deleteByEmployeeId(Integer id) {
+            iEmployeeRepository.deleteByEmployeeId(id);
     }
 }

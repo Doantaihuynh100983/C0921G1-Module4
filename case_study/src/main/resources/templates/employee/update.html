@@ -28,7 +28,7 @@
                                     <div class="container">
                                         <form id="contact-form" role="form" th:object="${employee}" action="/employee/update" method="post">
                                             <div class="controls">
-                                                <input type="text" th:field="*{employeeId}">
+                                                <input type="hidden" th:field="*{employeeId}">
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group">
