@@ -92,11 +92,10 @@ public class EmployeeCotroller {
         return "employee/views";
     }
 
+
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable int id){
         iEmployeeService.deleteByEmployeeId(id);
         return "redirect:/employee/list";
     }
-
-    // delete đang bị gì chưa xóa được 
 }

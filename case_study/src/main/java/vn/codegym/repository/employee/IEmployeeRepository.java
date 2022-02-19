@@ -10,10 +10,12 @@ import vn.codegym.model.EducationDegree;
 import vn.codegym.model.Employee;
 import vn.codegym.model.Position;
 
+import javax.transaction.Transactional;
 import java.util.Optional;
 
+@Transactional
 public interface IEmployeeRepository extends JpaRepository<Employee,Integer> {
-    void deleteByEmployeeId(Integer id);
+    void deleteByEmployeeId(int id);
 
 
     @Query(value="select * from employee where employee_name like %:employeeName% and employee_adress like %:employeeAdress%  and position_id like %:position% and education_degreeid like %:educationDegree% and division_id like %:division%" ,nativeQuery=true)

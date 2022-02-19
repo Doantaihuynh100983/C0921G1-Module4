@@ -18,6 +18,6 @@ public interface IEmployeeService {
                                  String educationDegree,
                                  String division,
                                  Pageable pageable);
-    void deleteByEmployeeId(Integer id);
 
+    void deleteByEmployeeId(int id);
 }

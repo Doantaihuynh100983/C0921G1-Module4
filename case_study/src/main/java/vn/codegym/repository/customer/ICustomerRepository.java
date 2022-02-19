@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 import vn.codegym.model.Customer;
 
+@Transactional
 public interface ICustomerRepository extends JpaRepository<Customer,Integer> {
     void deleteByCustomerId(Integer id);
 

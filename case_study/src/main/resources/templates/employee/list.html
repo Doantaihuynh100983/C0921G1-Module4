@@ -91,30 +91,31 @@
                                 <i class="far fa-edit"></i>
                             </a>
 
-                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" th:data-bs-target="'#staticBackdrop' + ${em.employeeId}">
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" th:data-bs-target="'#exampleModal1' +${em.employeeId}">
                                 <i class="fas fa-trash"></i>
                             </button>
 
-                            <!-- Modal delete-->
-                            <div class="modal fade modalDelete" th:id="staticBackdrop + ${em.employeeId}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <!-- Modal -->
+                            <div class="modal fade modalD" th:id="'exampleModal1'+${em.employeeId}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="staticBackdropLabel" style="color: red">Bạn Có Muốn Xóa !!</h5>
+                                            <h5 class="modal-title" id="exampleModalLabel1" style="color: red">BẠN CÓ MUỐN XÓA !!</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
-                                        <div class="modal-body">
-                                            <h1 th:text="${em.employeeId}"></h1>
+                                        <div class="modal-body" th:text="${em.employeeId}">
+
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary btnDeleteEmployee">DELETE</button>
+                                            <button type="button" class="btn btn-primary btnDeleteE">DELETE</button>
                                             <input type="hidden" th:value="${em.employeeId}">
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
                         </th>
                     </tr>
                     </tbody>
@@ -171,23 +172,22 @@
         })
     })
 
-
     $(document).ready(function () {
-        $(".btnDeleteEmployee").click(function () {
+        $(".btnDeleteE").click(function () {
             let id = $(this).next().val();
-            console.log(id)
             $.ajax({
                 type : "GET",
                 url : "/employee/delete/"+id,
                 dataType : "HTML",
                 success : function (data) {
-                    $(".modalDelete").modal("hide");
+                    console.log(data)
+                    $(".modalD").modal("hide");
                     $("#contentE").html(data);
-
                 }
 
             })
         })
     })
+
 </script>
 </html>
