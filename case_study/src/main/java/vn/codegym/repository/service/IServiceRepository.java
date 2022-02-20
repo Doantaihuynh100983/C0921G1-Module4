@@ -1,11 +1,12 @@
-package vn.codegym.repository.employee;
+package vn.codegym.repository.service;
+
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import vn.codegym.model.Division;
+import vn.codegym.model.Service;
 
 @Repository
 @Transactional
-public interface IDivisionRepository  extends JpaRepository<Division,Integer> {
+public interface IServiceRepository extends JpaRepository<Service, Integer> {
 }

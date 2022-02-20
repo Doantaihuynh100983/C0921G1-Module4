@@ -1,5 +1,8 @@
 package vn.codegym.dto;
 
+import vn.codegym.model.RentType;
+import vn.codegym.model.ServiceType;
+
 public class ServiceDto {
     private Integer serviceId;
     private String serviceName;
@@ -10,9 +13,12 @@ public class ServiceDto {
     private String descriptionOtherConvenience;
     private Double poolArea;
     private Integer numberOfFloors;
+    private ServiceType serviceType;
+    private RentType rentType;
 
-    public ServiceDto(Integer serviceId, String serviceName, Integer serviceArea, Double serviceCost, Integer serviceMaxPeople, String standandRoom,
-                      String descriptionOtherConvenience, Double poolArea, Integer numberOfFloors) {
+    public ServiceDto(Integer serviceId, String serviceName, Integer serviceArea, Double serviceCost,
+                      Integer serviceMaxPeople, String standandRoom, String descriptionOtherConvenience,
+                      Double poolArea, Integer numberOfFloors, ServiceType serviceType, RentType rentType) {
         this.serviceId = serviceId;
         this.serviceName = serviceName;
         this.serviceArea = serviceArea;
@@ -22,9 +28,27 @@ public class ServiceDto {
         this.descriptionOtherConvenience = descriptionOtherConvenience;
         this.poolArea = poolArea;
         this.numberOfFloors = numberOfFloors;
+        this.serviceType = serviceType;
+        this.rentType = rentType;
     }
 
     public ServiceDto() {
+    }
+
+    public ServiceType getServiceType() {
+        return serviceType;
+    }
+
+    public void setServiceType(ServiceType serviceType) {
+        this.serviceType = serviceType;
+    }
+
+    public RentType getRentType() {
+        return rentType;
+    }
+
+    public void setRentType(RentType rentType) {
+        this.rentType = rentType;
     }
 
     public Integer getServiceId() {

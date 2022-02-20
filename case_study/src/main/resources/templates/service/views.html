@@ -11,39 +11,47 @@
     <table class="table table-striped">
         <tr>
             <td height="col">ID</td>
-            <td height="col" th:text="${c.customerId}"></td>
+            <td height="col" th:text="${service.serviceId}"></td>
         </tr>
         <tr>
             <td height="col">Name</td>
-            <td height="col" th:text="${c.customerName}"></td>
+            <td height="col" th:text="${service.serviceName}"></td>
         </tr>
         <tr>
-            <td height="col">Birthday</td>
-            <td height="col" th:text="${c.customerBirthday}"></td>
+            <td height="col">Service Area</td>
+            <td height="col" th:text="${service.serviceArea}"></td>
         </tr>
         <tr>
-            <td height="col">Gender</td>
-            <td height="col" th:text="${c.customerGender}"></td>
+            <td height="col">Service Cost</td>
+            <td height="col" th:text="${service.serviceCost}"></td>
         </tr>
         <tr>
-            <td height="col">IdCard</td>
-            <td height="col" th:text="${c.customerIdCard}"></td>
+            <td height="col">Max People</td>
+            <td height="col" th:text="${service.serviceMaxPeople}"></td>
         </tr>
         <tr>
-            <td height="col">Phone</td>
-            <td height="col" th:text="${c.customerPhone}"></td>
+            <td height="col">Standand Room</td>
+            <td height="col" th:text="${service.standandRoom}"></td>
         </tr>
         <tr>
-            <td height="col">Email</td>
-            <td height="col" th:text="${c.customerEmail}"></td>
+            <td height="col">Description</td>
+            <td height="col" th:text="${service.descriptionOtherConvenience}"></td>
         </tr>
         <tr>
-            <td height="col">Address</td>
-            <td height="col" th:text="${c.customerAddress}"></td>
+            <td height="col">Pool Area</td>
+            <td height="col" th:text="${service.poolArea}"></td>
         </tr>
         <tr>
-            <td height="col">Customer Type</td>
-            <td height="col" th:text="${c.customerType.customerTypeName}"></td>
+            <td height="col">Number OfF loors</td>
+            <td height="col" th:text="${service.numberOfFloors}"></td>
+        </tr>
+        <tr>
+            <td height="col">Service Type</td>
+            <td height="col" th:text="${service.serviceType.serviceTypeName}"></td>
+        </tr>
+        <tr>
+            <td height="col">Rent Type</td>
+            <td height="col" th:text="${service.rentType.rentTypeName}"></td>
         </tr>
     </table>
 </div>

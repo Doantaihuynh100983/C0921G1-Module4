@@ -28,73 +28,76 @@ public class EmployeeCotroller {
     IEducationService iEducationService;
     @Autowired
     IDivisionService iDivisionService;
+
     @GetMapping("/list")
-    public String getAllList(Model model ,
-                             @PageableDefault(value = 6) Pageable pageable ,
-                             @RequestParam(defaultValue = "")String employeeName ,
-                             @RequestParam(defaultValue = "") String employeeAdress ,
-                             @RequestParam(defaultValue = "") String position ,
-                             @RequestParam(defaultValue = "") String educationDegree ,
-                             @RequestParam(defaultValue = "") String division){
-        model.addAttribute("employee", iEmployeeService.seachEmployee(employeeName,employeeAdress,position,educationDegree,division,pageable));
+    public String getAllList(Model model,
+                             @PageableDefault(value = 6) Pageable pageable,
+                             @RequestParam(defaultValue = "") String employeeName,
+                             @RequestParam(defaultValue = "") String employeeAdress,
+                             @RequestParam(defaultValue = "") String position,
+                             @RequestParam(defaultValue = "") String educationDegree,
+                             @RequestParam(defaultValue = "") String division) {
+        model.addAttribute("employee", iEmployeeService.seachEmployee(employeeName, employeeAdress, position, educationDegree, division, pageable));
         return "employee/list";
     }
 
     @GetMapping("/viewAdd")
-    public String viewAdd(Model model){
+    public String viewAdd(Model model) {
         model.addAttribute("employee", new EmployeeDto());
         return "employee/add";
     }
 
 
     @PostMapping("/addEmployee")
-    public String addEmployee(@ModelAttribute EmployeeDto employeeDto){
+    public String addEmployee(@ModelAttribute EmployeeDto employeeDto) {
         Employee employee = new Employee();
-        BeanUtils.copyProperties(employeeDto,employee);
+        BeanUtils.copyProperties(employeeDto, employee);
         iEmployeeService.saveEmployee(employee);
         return "redirect:/employee/list";
     }
 
 
     @GetMapping("/viewUpdate/{id}")
-    public String viewUpdate(@PathVariable Integer id , Model model){
-        model.addAttribute("employee",iEmployeeService.findByIdEmployee(id));
+    public String viewUpdate(@PathVariable Integer id, Model model) {
+        model.addAttribute("employee", iEmployeeService.findByIdEmployee(id));
         return "employee/update";
     }
 
 
     @PostMapping("/update")
-    public String update(@ModelAttribute EmployeeDto employeeDto){
+    public String update(@ModelAttribute EmployeeDto employeeDto) {
         Employee employee = new Employee();
-        BeanUtils.copyProperties(employeeDto,employee);
+        BeanUtils.copyProperties(employeeDto, employee);
         iEmployeeService.saveEmployee(employee);
         return "redirect:/employee/list";
     }
 
 
     @ModelAttribute("position")
-    public List<Position> positions(){
+    public List<Position> positions() {
         return iPositionService.getAllPosition();
     }
+
     @ModelAttribute("eduction")
-    public List<EducationDegree> eductions(){
+    public List<EducationDegree> eductions() {
         return iEducationService.getAllEducation();
     }
+
     @ModelAttribute("division")
-    public List<Division> divisions(){
+    public List<Division> divisions() {
         return iDivisionService.getAllDivision();
     }
 
 
     @GetMapping("/views/{id}")
-    public String views( @PathVariable int id , Model model ){
-        model.addAttribute("e",iEmployeeService.findByIdEmployee(id));
+    public String views(@PathVariable int id, Model model) {
+        model.addAttribute("e", iEmployeeService.findByIdEmployee(id));
         return "employee/views";
     }
 
 
     @GetMapping("/delete/{id}")
-    public String delete(@PathVariable int id){
+    public String delete(@PathVariable int id) {
         iEmployeeService.deleteByEmployeeId(id);
         return "redirect:/employee/list";
     }

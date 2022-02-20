@@ -29,34 +29,34 @@ public class CustomerController {
 
 
     @GetMapping({"/customer"})
-    public String getAllCustomer(Model model ,
-                                 @PageableDefault(value = 6)Pageable pageable,
+    public String getAllCustomer(Model model,
+                                 @PageableDefault(value = 6) Pageable pageable,
                                  @RequestParam(defaultValue = "") String customerName,
-                                 @RequestParam(defaultValue = "") String  customerAddress,
-                                 @RequestParam(defaultValue = "") String   customerType){
-                    model.addAttribute("customer" , iCustomerService.searchCustomer(customerName,customerAddress,customerType,pageable));
+                                 @RequestParam(defaultValue = "") String customerAddress,
+                                 @RequestParam(defaultValue = "") String customerType) {
+        model.addAttribute("customer", iCustomerService.searchCustomer(customerName, customerAddress, customerType, pageable));
         return "customer/list";
     }
 
     @ModelAttribute("customerType")
-    public List<CustomerType> customerType(){
+    public List<CustomerType> customerType() {
         return iCustomerTypeService.getAllCustomerType();
     }
 
     @GetMapping("/viewAdd")
-    public String viewAddCustomer(Model model){
+    public String viewAddCustomer(Model model) {
         model.addAttribute("customerDto", new CustomerDto());
         return "customer/add";
     }
+
     @PostMapping("/viewNewAdd")
-    public String addCustomer( @Valid  @ModelAttribute CustomerDto customerDto ,
-                              BindingResult bindingResult){
-        if (bindingResult.hasFieldErrors()){
+    public String addCustomer(@Valid @ModelAttribute CustomerDto customerDto,
+                              BindingResult bindingResult) {
+        if (bindingResult.hasFieldErrors()) {
             return "customer/add";
-        }
-        else {
+        } else {
             Customer customer = new Customer();
-            BeanUtils.copyProperties(customerDto,customer);
+            BeanUtils.copyProperties(customerDto, customer);
             iCustomerService.saveCustomer(customer);
             return "redirect:/customer";
         }
@@ -64,24 +64,25 @@ public class CustomerController {
     }
 
     @GetMapping("/viewUpdateCustomer/{id}")
-    public String viewUpdateCustomer(@PathVariable Integer id, Model model){
-            model.addAttribute("customer", iCustomerService.findById(id));
+    public String viewUpdateCustomer(@PathVariable Integer id, Model model) {
+        model.addAttribute("customer", iCustomerService.findById(id));
         return "customer/update";
     }
+
     @PostMapping("/updateCustomer")
-    public String updateCustomer(@ModelAttribute Customer customer){
-            iCustomerService.saveCustomer(customer);
+    public String updateCustomer(@ModelAttribute Customer customer) {
+        iCustomerService.saveCustomer(customer);
         return "redirect:/customer";
     }
 
     @GetMapping("/viewsByIdCustomer/{id}")
-    public String viewCustomer( @PathVariable int id, Model model){
-        model.addAttribute("c",iCustomerService.findById(id));
+    public String viewCustomer(@PathVariable int id, Model model) {
+        model.addAttribute("c", iCustomerService.findById(id));
         return "customer/views";
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteCustomer( @PathVariable int id){
+    public String deleteCustomer(@PathVariable int id) {
         iCustomerService.deleteCustomer(id);
         return "redirect:/customer";
     }

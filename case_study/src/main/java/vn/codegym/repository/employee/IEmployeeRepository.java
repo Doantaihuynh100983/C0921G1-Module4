@@ -5,6 +5,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 import vn.codegym.model.Division;
 import vn.codegym.model.EducationDegree;
 import vn.codegym.model.Employee;
@@ -14,6 +15,7 @@ import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Transactional
+@Repository
 public interface IEmployeeRepository extends JpaRepository<Employee,Integer> {
     void deleteByEmployeeId(int id);
 
