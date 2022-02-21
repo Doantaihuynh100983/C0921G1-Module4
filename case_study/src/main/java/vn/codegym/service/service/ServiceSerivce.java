@@ -21,4 +21,14 @@ public class ServiceSerivce implements IServiceService{
     public vn.codegym.model.Service findbyIdService(Integer id) {
         return iServiceRepository.findById(id).orElse(new vn.codegym.model.Service());
     }
+
+    @Override
+    public void addNewService(vn.codegym.model.Service service) {
+            iServiceRepository.save(service);
+    }
+
+    @Override
+    public void deleteService(Integer id) {
+        iServiceRepository.deleteByServiceId(id);
+    }
 }

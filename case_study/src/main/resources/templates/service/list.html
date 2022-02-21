@@ -9,7 +9,7 @@
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body>
-<div id="contentE">
+<div id="content">
     <div th:replace="/layout/nabar::navbar"></div>
     <div class="container-fluid">
 
@@ -21,7 +21,7 @@
                     <br>
                     <div class="d-flex bd-highlight">
                         <div class="p-2 flex-grow-1 bd-highlight">
-                            <a type="button" class="btn btn-outline-primary ">THÊM MỚI DỊCH VỤ</a>
+                            <a type="button" class="btn btn-outline-primary"  href="/service/viewAdd">THÊM MỚI DỊCH VỤ</a>
                         </div>
                         <form action="/employee/list">
 
@@ -66,13 +66,41 @@
                             </button>
                             <input type="hidden" th:value="${sr.serviceId}">
 
-                            <a type="button" class="btn btn-primary">
+                            <a type="button" class="btn btn-primary"   th:href="@{/service/viewUpdate/__${sr.serviceId}__}">
                                 <i class="far fa-edit"></i>
                             </a>
-                            <button type="button" class="btn btn-danger">
+
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                    th:data-bs-target="'#exampleModal1' +${sr.serviceId}">
                                 <i class="fas fa-trash"></i>
                             </button>
 
+                            <!-- Modal -->
+                            <div class="modal fade modalSv" th:id="'exampleModal1'+${sr.serviceId}" tabindex="-1"
+                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel1" style="color: red">BẠN CÓ
+                                                MUỐN XÓA !!</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body" th:text="${sr.serviceId}">
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                Close
+                                            </button>
+                                            <button type="button" class="btn btn-primary btnDeleteSv">DELETE</button>
+                                            <input type="hidden" th:value="${sr.serviceId}">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </th>
                     </tr>
                     </tbody>
@@ -125,6 +153,22 @@
                     $("#exampleModal").modal("show");
                 }
 
+            })
+        })
+    })
+    $(document).ready(function () {
+        $(".btnDeleteSv").click(function () {
+            let id = $(this).next().val();
+            console.log(id)
+            $.ajax({
+                type: "GET",
+                url: "/service/delete/" + id,
+                dataType: "HTML",
+                success: function (data) {
+                    $('.modalSv').modal('hide');
+                    $("#content").html(data);
+
+                }
             })
         })
     })

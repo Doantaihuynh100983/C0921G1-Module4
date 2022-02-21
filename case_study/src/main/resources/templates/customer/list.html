@@ -122,13 +122,27 @@
                     </tbody>
                 </table>
 
-                <a type="button" class="btn btn-primary" th:href="@{'/customer'(page = ${customer.number - 1})}"
-                   th:if="${customer.hasPrevious()}">Back</a>
-                <span th:text="${customer.number + 1 }"> </span> / <span th:text="${customer.totalPages}"> </span>
-                <a type="button" class="btn btn-primary" th:href="@{'/customer'(page = ${customer.number + 1})}"
-                   th:if="${customer.hasNext()}">Next</a>
-
-
+                <nav aria-label="...">
+                    <ul class="pagination">
+                        <li class="page-item ">
+                            <a class="page-link" th:href="@{'/customer'(page = ${customer.number - 1},
+                            customerName = ${customerName} ,
+                            customerAddress = ${customerAddress},
+                           customerType = ${customerType1} )}"
+                               th:if="${customer.hasPrevious()}" tabindex="-1" aria-disabled="true">Previous</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link"> <span th:text="${customer.number + 1 }"> </span> / <span th:text="${customer.totalPages}"> </span></a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" th:href="@{'/customer'(page = ${customer.number + 1} ,
+                            customerName = ${customerName} ,
+                            customerAddress = ${customerAddress},
+                           customerType = ${customerType1})}"
+                               th:if="${customer.hasNext()}">Next</a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
         </div>
     </div>

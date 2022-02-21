@@ -135,12 +135,32 @@
                     </tr>
                     </tbody>
                 </table>
-
-                <a type="button" class="btn btn-primary" th:href="@{'/employee/list'(page = ${employee.number - 1})}"
-                   th:if="${employee.hasPrevious()}">Back</a>
-                <span th:text="${employee.number + 1 }"> </span> / <span th:text="${employee.totalPages}"> </span>
-                <a type="button" class="btn btn-primary" th:href="@{'/employee/list'(page = ${employee.number + 1})}"
-                   th:if="${employee.hasNext()}">Next</a>
+                <nav aria-label="...">
+                    <ul class="pagination">
+                        <li class="page-item ">
+                            <a class="page-link" th:href="@{'/employee/list'(page = ${employee.number - 1},
+                           employeeName = ${employeeName} ,
+                           employeeAdress = ${employeeAdress},
+                            position = ${position1} ,
+                           educationDegree = ${educationDegree1},
+                            division = ${division1})}"
+                               th:if="${employee.hasPrevious()}"
+                               tabindex="-1" aria-disabled="true">Previous</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link">     <span th:text="${employee.number + 1 }"> </span> / <span th:text="${employee.totalPages}"> </span></a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" th:href="@{'/employee/list'(page = ${employee.number + 1},
+                            employeeName = ${employeeName} ,
+                           employeeAdress = ${employeeAdress},
+                            position = ${position1} ,
+                           educationDegree = ${educationDegree1},
+                            division = ${division1})}"
+                               th:if="${employee.hasNext()}">Next</a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
         </div>
     </div>

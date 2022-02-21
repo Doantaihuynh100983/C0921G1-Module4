@@ -9,4 +9,5 @@ import vn.codegym.model.Service;
 @Repository
 @Transactional
 public interface IServiceRepository extends JpaRepository<Service, Integer> {
+    void deleteByServiceId(Integer id);
 }

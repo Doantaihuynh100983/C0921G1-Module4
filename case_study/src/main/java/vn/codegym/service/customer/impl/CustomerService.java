@@ -36,8 +36,8 @@ public class CustomerService implements ICustomerService {
         iCustomerRepository.deleteByCustomerId(id);
     }
     @Override
-    public Page<Customer> searchCustomer(String name, String adress, String customerTypeId, Pageable pageable) {
-        return iCustomerRepository.searchCustomer(name,adress,customerTypeId,pageable);    }
+    public Page<Customer> searchCustomer(String name, String adress, String customerType, Pageable pageable) {
+        return iCustomerRepository.searchCustomer(name,adress,customerType,pageable);    }
 
 
 }

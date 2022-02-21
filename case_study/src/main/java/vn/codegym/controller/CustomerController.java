@@ -35,6 +35,9 @@ public class CustomerController {
                                  @RequestParam(defaultValue = "") String customerAddress,
                                  @RequestParam(defaultValue = "") String customerType) {
         model.addAttribute("customer", iCustomerService.searchCustomer(customerName, customerAddress, customerType, pageable));
+        model.addAttribute("customerName", customerName);
+        model.addAttribute("customerAddress", customerAddress);
+        model.addAttribute("customerType1", customerType);
         return "customer/list";
     }
 

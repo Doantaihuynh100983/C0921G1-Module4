@@ -38,6 +38,11 @@ public class EmployeeCotroller {
                              @RequestParam(defaultValue = "") String educationDegree,
                              @RequestParam(defaultValue = "") String division) {
         model.addAttribute("employee", iEmployeeService.seachEmployee(employeeName, employeeAdress, position, educationDegree, division, pageable));
+        model.addAttribute("employeeName" , employeeName);
+        model.addAttribute("employeeAdress" , employeeAdress);
+        model.addAttribute("position1" , position);
+        model.addAttribute("educationDegree1" , educationDegree);
+        model.addAttribute("division1" , division);
         return "employee/list";
     }
 
