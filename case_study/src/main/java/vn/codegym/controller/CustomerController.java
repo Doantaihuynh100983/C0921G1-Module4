@@ -29,7 +29,7 @@ public class CustomerController {
 
 
     @GetMapping({"/customer"})
-    public String getAllCustomer(Model model,
+    public String getCustomer(Model model,
                                  @PageableDefault(value = 6) Pageable pageable,
                                  @RequestParam(defaultValue = "") String customerName,
                                  @RequestParam(defaultValue = "") String customerAddress,
@@ -40,7 +40,6 @@ public class CustomerController {
         model.addAttribute("customerType1", customerType);
         return "customer/list";
     }
-
     @ModelAttribute("customerType")
     public List<CustomerType> customerType() {
         return iCustomerTypeService.getAllCustomerType();

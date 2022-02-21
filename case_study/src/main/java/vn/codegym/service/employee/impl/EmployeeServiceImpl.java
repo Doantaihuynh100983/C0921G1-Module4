@@ -16,8 +16,8 @@ public class EmployeeServiceImpl implements IEmployeeService {
     @Autowired
     IEmployeeRepository iEmployeeRepository;
     @Override
-    public Page<Employee> getAllEmployee(Pageable pageable) {
-        return iEmployeeRepository.findAll(pageable);
+    public List<Employee> getAllEmployee() {
+        return iEmployeeRepository.findAll();
     }
 
     @Override

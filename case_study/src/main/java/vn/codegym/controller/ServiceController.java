@@ -28,8 +28,8 @@ public class ServiceController {
     IServiceTypeService iServiceTypeService;
 
     @GetMapping("/list")
-    public String getAllService(Model model, Pageable pageable) {
-        model.addAttribute("service", iServiceService.getAllService(pageable));
+    public String getAllService(Model model) {
+        model.addAttribute("service", iServiceService.getAllService());
         return "service/list";
     }
 

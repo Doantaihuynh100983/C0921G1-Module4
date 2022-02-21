@@ -20,6 +20,7 @@ public class ContractDetail {
     @JoinColumn(name = "attachServiceId" ,referencedColumnName =  "attachServiceId")
     private AttachService attachServiceId;
 
+
     public ContractDetail() {
     }
 

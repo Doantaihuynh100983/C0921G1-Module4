@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="content">
+    <div th:replace="/layout/nabar::navbar"></div>
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-2" th:replace="/layout/body::menu1">
+            </div>
+            <div class="col-10">
+                <div>
+                    <br>
+                    <div class="d-flex bd-highlight">
+                        <div class="p-2 flex-grow-1 bd-highlight">
+                            <a type="button" class="btn btn-outline-primary " href="/contract/viewAdd">THÊM MỚI HỢP
+                                ĐỒNG</a>
+                        </div>
+                    </div>
+
+                </div>
+                <p class="fs-2 fw-bolder text-center">DANH SÁCH HỢP ĐỒNG</p>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Contract Start Date</th>
+                        <th scope="col">Contract End Date</th>
+                        <th scope="col">Contract Deposit</th>
+                        <th scope="col">Contract Total Money</th>
+                        <th scope="col">Customer</th>
+                        <th scope="col">Employee</th>
+                        <th scope="col">Service</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="ct : ${contract}">
+                        <th th:text="${ct.contractId}"></th>
+                        <th th:text="${ct.contractStartDate}"></th>
+                        <th th:text="${ct.contrachEndDate}"></th>
+                        <th th:text="${ct.contractDeposit}"></th>
+                        <th th:text="${ct.contractTotalMoney}"></th>
+                        <th th:text="${ct.customerId.customerName}"></th>
+                        <th th:text="${ct.employeeId.employeeName}"></th>
+                        <th th:text="${ct.serviceId.serviceName}"></th>
+                        <th>
+                            <button type="button" class="btn btn-primary btnModalView">
+                                <i class="fas fa-cloud"></i>
+                            </button>
+
+                            <a type="button" class="btn btn-primary">
+                                <i class="far fa-edit"></i>
+                            </a>
+
+                            <button type="button" class="btn btn-danger ">
+                                <i class="fas fa-trash"></i>
+                            </button>
+
+                            <a type="button" class="btn btn-primary"
+                               th:href="@{/contractDetail/viewAddContractDetail/__${ct.contractId}__}">
+                                <i class="fas fa-address-card"></i>
+                            </a>
+
+                        </th>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+
+</div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+        crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</html>

@@ -47,6 +47,30 @@ public class Contract {
         this.contractDetails = contractDetails;
     }
 
+    public List<ContractDetail> getContractDetails() {
+        return contractDetails;
+    }
+
+    public void setContractDetails(List<ContractDetail> contractDetails) {
+        this.contractDetails = contractDetails;
+    }
+
+    public Customer getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(Customer customerId) {
+        this.customerId = customerId;
+    }
+
+    public Service getServiceId() {
+        return serviceId;
+    }
+
+    public void setServiceId(Service serviceId) {
+        this.serviceId = serviceId;
+    }
+
     public int getContractId() {
         return contractId;
     }
