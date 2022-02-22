@@ -36,7 +36,7 @@ public class Employee {
     private List<Contract> contract;
 
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "userName" , referencedColumnName = "userName")
     private User user;
 

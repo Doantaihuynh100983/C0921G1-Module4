@@ -12,8 +12,8 @@ public class User {
     private String passWord;
 
 
-    @OneToMany(mappedBy = "user")
-    private List<Employee> employee;
+    @OneToOne(mappedBy = "user")
+    private Employee employee;
 
 
     @ManyToMany(fetch = FetchType.EAGER) // loại bỏ đệ quy dữ liệu thường

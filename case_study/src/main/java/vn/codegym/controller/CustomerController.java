@@ -2,7 +2,6 @@ package vn.codegym.controller;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
@@ -14,12 +13,11 @@ import vn.codegym.model.Customer;
 import vn.codegym.model.CustomerType;
 import vn.codegym.service.customer.ICustomerService;
 import vn.codegym.service.customer.ICustomerTypeService;
-
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
+@RequestMapping("/customer")
 public class CustomerController {
     @Autowired
     private ICustomerService iCustomerService;
@@ -27,7 +25,7 @@ public class CustomerController {
     private ICustomerTypeService iCustomerTypeService;
 
 
-    @GetMapping({"/customer"})
+    @GetMapping("/list")
     public String getCustomer(Model model,
                               @PageableDefault(value = 6) Pageable pageable,
                               @RequestParam(defaultValue = "") String customerName,
@@ -61,7 +59,7 @@ public class CustomerController {
             Customer customer = new Customer();
             BeanUtils.copyProperties(customerDto, customer);
             iCustomerService.saveCustomer(customer);
-            return "redirect:/customer";
+            return "redirect:/customer/list";
         }
 
     }
@@ -85,7 +83,7 @@ public class CustomerController {
             Customer customer = new Customer();
             BeanUtils.copyProperties(customerDto, customer);
             iCustomerService.saveCustomer(customer);
-            return "redirect:/customer";
+            return "redirect:/customer/list";
         }
 
     }
@@ -99,7 +97,7 @@ public class CustomerController {
     @GetMapping("/delete/{id}")
     public String deleteCustomer(@PathVariable int id) {
         iCustomerService.deleteCustomer(id);
-        return "redirect:/customer";
+        return "redirect:/customer/list";
     }
 
 

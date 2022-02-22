@@ -2,7 +2,6 @@ package vn.codegym.controller;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,8 +13,6 @@ import vn.codegym.model.ServiceType;
 import vn.codegym.service.service.IRentTypeService;
 import vn.codegym.service.service.IServiceService;
 import vn.codegym.service.service.IServiceTypeService;
-import vn.codegym.service.service.ServiceTypeService;
-
 import javax.validation.Valid;
 import java.util.List;
 
