@@ -22,23 +22,24 @@ import java.util.Optional;
 @Controller
 public class CustomerController {
     @Autowired
-    ICustomerService iCustomerService;
+    private ICustomerService iCustomerService;
     @Autowired
-    ICustomerTypeService iCustomerTypeService;
+    private ICustomerTypeService iCustomerTypeService;
 
 
     @GetMapping({"/customer"})
     public String getCustomer(Model model,
-                                 @PageableDefault(value = 6) Pageable pageable,
-                                 @RequestParam(defaultValue = "") String customerName,
-                                 @RequestParam(defaultValue = "") String customerAddress,
-                                 @RequestParam(defaultValue = "") String customerType) {
+                              @PageableDefault(value = 6) Pageable pageable,
+                              @RequestParam(defaultValue = "") String customerName,
+                              @RequestParam(defaultValue = "") String customerAddress,
+                              @RequestParam(defaultValue = "") String customerType) {
         model.addAttribute("customer", iCustomerService.searchCustomer(customerName, customerAddress, customerType, pageable));
         model.addAttribute("customerName", customerName);
         model.addAttribute("customerAddress", customerAddress);
         model.addAttribute("customerType1", customerType);
         return "customer/list";
     }
+
     @ModelAttribute("customerType")
     public List<CustomerType> customerType() {
         return iCustomerTypeService.getAllCustomerType();
@@ -53,7 +54,7 @@ public class CustomerController {
     @PostMapping("/viewNewAdd")
     public String addCustomer(@Valid @ModelAttribute CustomerDto customerDto,
                               BindingResult bindingResult) {
-        new CustomerDto().validate(customerDto,bindingResult);
+        new CustomerDto().validate(customerDto, bindingResult);
         if (bindingResult.hasFieldErrors()) {
             return "customer/add";
         } else {
@@ -69,18 +70,18 @@ public class CustomerController {
     public String viewUpdateCustomer(@PathVariable Integer id, Model model) {
         Customer customer = iCustomerService.findById(id);
         CustomerDto customerDto = new CustomerDto();
-        BeanUtils.copyProperties(customer,customerDto);
+        BeanUtils.copyProperties(customer, customerDto);
         model.addAttribute("customerDto", customerDto);
         return "customer/update";
     }
 
     @PostMapping("/updateCustomer")
-    public String updateCustomer( @Valid @ModelAttribute CustomerDto customerDto ,
-                                  BindingResult bindingResult) {
-        new CustomerDto().validate(customerDto,bindingResult);
-        if (bindingResult.hasFieldErrors()){
+    public String updateCustomer(@Valid @ModelAttribute CustomerDto customerDto,
+                                 BindingResult bindingResult) {
+        new CustomerDto().validate(customerDto, bindingResult);
+        if (bindingResult.hasFieldErrors()) {
             return "customer/update";
-        }else {
+        } else {
             Customer customer = new Customer();
             BeanUtils.copyProperties(customerDto, customer);
             iCustomerService.saveCustomer(customer);

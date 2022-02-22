@@ -8,9 +8,10 @@ import vn.codegym.repository.service.IRentypeRepository;
 import java.util.List;
 
 @Service
-public class RentTypeService implements IRentTypeService{
+public class RentTypeService implements IRentTypeService {
     @Autowired
-    IRentypeRepository iRentypeRepository;
+    private IRentypeRepository iRentypeRepository;
+
     @Override
     public List<RentType> getAllRentType() {
         return iRentypeRepository.findAll();

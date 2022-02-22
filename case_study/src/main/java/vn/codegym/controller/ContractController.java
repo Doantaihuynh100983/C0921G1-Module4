@@ -27,41 +27,43 @@ import java.util.List;
 @RequestMapping("/contract")
 public class ContractController {
     @Autowired
-    IContractService iContractService;
+    private IContractService iContractService;
     @Autowired
-    ICustomerService iCustomerService;
+    private ICustomerService iCustomerService;
     @Autowired
-    IEmployeeService iEmployeeService;
+    private IEmployeeService iEmployeeService;
     @Autowired
-    IServiceService iServiceService;
-        @GetMapping("/list")
-        public String getAllContract(Model model){
-            model.addAttribute("contract",iContractService.getAllContract());
-            return "contract/list";
-        }
-        @GetMapping("/viewAdd")
-        public String viewAdd(Model model){
-            model.addAttribute("contractDto",new ContractDto());
-            model.addAttribute("customer",iCustomerService.getAllCustomer());
-            model.addAttribute("employee",iEmployeeService.getAllEmployee());
-            model.addAttribute("service",iServiceService.getAllService());
-            return  "contract/add";
+    private IServiceService iServiceService;
+
+    @GetMapping("/list")
+    public String getAllContract(Model model) {
+        model.addAttribute("contract", iContractService.getAllContract());
+        return "contract/list";
+    }
+
+    @GetMapping("/viewAdd")
+    public String viewAdd(Model model) {
+        model.addAttribute("contractDto", new ContractDto());
+        model.addAttribute("customer", iCustomerService.getAllCustomer());
+        model.addAttribute("employee", iEmployeeService.getAllEmployee());
+        model.addAttribute("service", iServiceService.getAllService());
+        return "contract/add";
+    }
+
+    @PostMapping("/addContract")
+    public String addContract(@Valid @ModelAttribute ContractDto contractDto, BindingResult bindingResult, Model model) {
+        new ContractDto().validate(contractDto, bindingResult);
+        if (bindingResult.hasFieldErrors()) {
+            model.addAttribute("customer", iCustomerService.getAllCustomer());
+            model.addAttribute("employee", iEmployeeService.getAllEmployee());
+            model.addAttribute("service", iServiceService.getAllService());
+            return "contract/add";
+        } else {
+            Contract contract = new Contract();
+            BeanUtils.copyProperties(contractDto, contract);
+            iContractService.addContract(contract);
+            return "redirect:/contract/list";
         }
 
-        @PostMapping("/addContract")
-        public String addContract(@Valid  @ModelAttribute ContractDto contractDto, BindingResult bindingResult , Model model){
-            new ContractDto().validate(contractDto,bindingResult);
-            if (bindingResult.hasFieldErrors()){
-                model.addAttribute("customer",iCustomerService.getAllCustomer());
-                model.addAttribute("employee",iEmployeeService.getAllEmployee());
-                model.addAttribute("service",iServiceService.getAllService());
-                return  "contract/add";
-            }else {
-                Contract contract = new Contract();
-                BeanUtils.copyProperties(contractDto,contract);
-                iContractService.addContract(contract);
-                return "redirect:/contract/list";
-            }
-
-        }
+    }
 }

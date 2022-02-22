@@ -23,11 +23,11 @@ import java.util.List;
 @RequestMapping("/service")
 public class ServiceController {
     @Autowired
-    IServiceService iServiceService;
+    private IServiceService iServiceService;
     @Autowired
-    IRentTypeService iRentTypeService;
+    private IRentTypeService iRentTypeService;
     @Autowired
-    IServiceTypeService iServiceTypeService;
+    private IServiceTypeService iServiceTypeService;
 
     @GetMapping("/list")
     public String getAllService(Model model) {
@@ -40,19 +40,21 @@ public class ServiceController {
         model.addAttribute("service", iServiceService.findbyIdService(id));
         return "service/views";
     }
+
     @GetMapping("/viewAdd")
-    public String viewAdd(Model model){
-        model.addAttribute("serviceDto" , new ServiceDto());
+    public String viewAdd(Model model) {
+        model.addAttribute("serviceDto", new ServiceDto());
         return "service/add";
     }
+
     @PostMapping("/addService")
-    public String addService(@Valid  @ModelAttribute ServiceDto serviceDto , BindingResult bindingResult){
-        new ServiceDto().validate(serviceDto,bindingResult);
-        if (bindingResult.hasFieldErrors()){
+    public String addService(@Valid @ModelAttribute ServiceDto serviceDto, BindingResult bindingResult) {
+        new ServiceDto().validate(serviceDto, bindingResult);
+        if (bindingResult.hasFieldErrors()) {
             return "service/add";
-        }else {
+        } else {
             Service service = new Service();
-            BeanUtils.copyProperties(serviceDto,service);
+            BeanUtils.copyProperties(serviceDto, service);
             iServiceService.addNewService(service);
             return "redirect:/service/list";
         }
@@ -60,40 +62,41 @@ public class ServiceController {
     }
 
     @GetMapping("/viewUpdate/{id}")
-    public String viewUpdate(Model model , @PathVariable Integer id){
+    public String viewUpdate(Model model, @PathVariable Integer id) {
         Service service = iServiceService.findbyIdService(id);
         ServiceDto serviceDto = new ServiceDto();
-        BeanUtils.copyProperties(service,serviceDto);
-        model.addAttribute("serviceDto" ,serviceDto);
+        BeanUtils.copyProperties(service, serviceDto);
+        model.addAttribute("serviceDto", serviceDto);
         return "service/update";
     }
 
     @PostMapping("/updateService")
-    public String updateService(@Valid @ModelAttribute ServiceDto serviceDto ,
-                                BindingResult bindingResult){
-        new ServiceDto().validate(serviceDto,bindingResult);
-        if (bindingResult.hasFieldErrors()){
+    public String updateService(@Valid @ModelAttribute ServiceDto serviceDto,
+                                BindingResult bindingResult) {
+        new ServiceDto().validate(serviceDto, bindingResult);
+        if (bindingResult.hasFieldErrors()) {
             return "service/update";
-        }else {
+        } else {
             Service service = new Service();
-            BeanUtils.copyProperties(serviceDto,service);
+            BeanUtils.copyProperties(serviceDto, service);
             iServiceService.addNewService(service);
             return "redirect:/service/list";
         }
     }
 
     @GetMapping("/delete/{id}")
-    public String delete( @PathVariable Integer id){
+    public String delete(@PathVariable Integer id) {
         iServiceService.deleteService(id);
         return "redirect:/service/list";
     }
 
     @ModelAttribute("rentType")
-    public List<RentType> getAllRentType(){
+    public List<RentType> getAllRentType() {
         return iRentTypeService.getAllRentType();
     }
+
     @ModelAttribute("serviceTypeService")
-    public List<ServiceType> getAllServiceTypeService(){
+    public List<ServiceType> getAllServiceTypeService() {
         return iServiceTypeService.getAllServiceType();
     }
 }

@@ -14,7 +14,8 @@ import java.util.Optional;
 @Service
 public class EmployeeServiceImpl implements IEmployeeService {
     @Autowired
-    IEmployeeRepository iEmployeeRepository;
+    private IEmployeeRepository iEmployeeRepository;
+
     @Override
     public List<Employee> getAllEmployee() {
         return iEmployeeRepository.findAll();
@@ -37,12 +38,12 @@ public class EmployeeServiceImpl implements IEmployeeService {
                                         String educationDegree,
                                         String division,
                                         Pageable pageable) {
-        return iEmployeeRepository.searchEmployee(employeeName,employeeAdress,position,educationDegree,division,pageable);
+        return iEmployeeRepository.searchEmployee(employeeName, employeeAdress, position, educationDegree, division, pageable);
     }
 
     @Override
     public void deleteByEmployeeId(int id) {
-            iEmployeeRepository.deleteByEmployeeId(id);
+        iEmployeeRepository.deleteByEmployeeId(id);
     }
 
 }

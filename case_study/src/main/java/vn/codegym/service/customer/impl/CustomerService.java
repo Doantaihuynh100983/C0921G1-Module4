@@ -15,7 +15,7 @@ import java.util.List;
 @Transactional
 public class CustomerService implements ICustomerService {
     @Autowired
-    ICustomerRepository iCustomerRepository;
+    private  ICustomerRepository iCustomerRepository;
     @Override
     public List<Customer> getAllCustomer() {
         return iCustomerRepository.findAll();

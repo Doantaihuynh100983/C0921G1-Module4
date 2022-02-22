@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 public class ContractDetailService implements IContractDetailService{
     @Autowired
-    IContractDetailRepository iContractDetailRepository;
+    private  IContractDetailRepository iContractDetailRepository;
     @Override
     public List<ContractDetail> getAllContractDetail() {
         return iContractDetailRepository.findAll();

@@ -11,7 +11,8 @@ import java.util.List;
 @Service
 public class EducationServiceImpl implements IEducationService {
     @Autowired
-    IEducationRepository iEducationRepository;
+    private IEducationRepository iEducationRepository;
+
     @Override
     public List<EducationDegree> getAllEducation() {
         return iEducationRepository.findAll();

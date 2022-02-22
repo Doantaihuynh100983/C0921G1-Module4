@@ -9,9 +9,10 @@ import vn.codegym.repository.service.IServiceTypeRepository;
 import java.util.List;
 
 @Service
-public class ServiceTypeService implements IServiceTypeService{
+public class ServiceTypeService implements IServiceTypeService {
     @Autowired
-    IServiceTypeRepository iServiceTypeRepository;
+    private IServiceTypeRepository iServiceTypeRepository;
+
     @Override
     public List<ServiceType> getAllServiceType() {
         return iServiceTypeRepository.findAll();

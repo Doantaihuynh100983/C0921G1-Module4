@@ -23,13 +23,13 @@ import java.util.List;
 @RequestMapping("employee")
 public class EmployeeCotroller {
     @Autowired
-    IEmployeeService iEmployeeService;
+    private IEmployeeService iEmployeeService;
     @Autowired
-    IPositionService iPositionService;
+    private IPositionService iPositionService;
     @Autowired
-    IEducationService iEducationService;
+    private IEducationService iEducationService;
     @Autowired
-    IDivisionService iDivisionService;
+    private IDivisionService iDivisionService;
 
     @GetMapping("/list")
     public String getAllList(Model model,
@@ -40,11 +40,11 @@ public class EmployeeCotroller {
                              @RequestParam(defaultValue = "") String educationDegree,
                              @RequestParam(defaultValue = "") String division) {
         model.addAttribute("employee", iEmployeeService.seachEmployee(employeeName, employeeAdress, position, educationDegree, division, pageable));
-        model.addAttribute("employeeName" , employeeName);
-        model.addAttribute("employeeAdress" , employeeAdress);
-        model.addAttribute("position1" , position);
-        model.addAttribute("educationDegree1" , educationDegree);
-        model.addAttribute("division1" , division);
+        model.addAttribute("employeeName", employeeName);
+        model.addAttribute("employeeAdress", employeeAdress);
+        model.addAttribute("position1", position);
+        model.addAttribute("educationDegree1", educationDegree);
+        model.addAttribute("division1", division);
         return "employee/list";
     }
 
@@ -56,12 +56,11 @@ public class EmployeeCotroller {
 
 
     @PostMapping("/addEmployee")
-    public String addEmployee(@Valid  @ModelAttribute EmployeeDto employeeDto, BindingResult bindingResult) {
-        new EmployeeDto().validate(employeeDto,bindingResult);
-        if (bindingResult.hasFieldErrors()){
+    public String addEmployee(@Valid @ModelAttribute EmployeeDto employeeDto, BindingResult bindingResult) {
+        new EmployeeDto().validate(employeeDto, bindingResult);
+        if (bindingResult.hasFieldErrors()) {
             return "employee/add";
-        }
-        else {
+        } else {
             Employee employee = new Employee();
             BeanUtils.copyProperties(employeeDto, employee);
             iEmployeeService.saveEmployee(employee);
@@ -75,18 +74,18 @@ public class EmployeeCotroller {
     public String viewUpdate(@PathVariable Integer id, Model model) {
         Employee employee = iEmployeeService.findByIdEmployee(id);
         EmployeeDto employeeDto = new EmployeeDto();
-        BeanUtils.copyProperties(employee,employeeDto);
-        model.addAttribute("employeeDto",employeeDto);
+        BeanUtils.copyProperties(employee, employeeDto);
+        model.addAttribute("employeeDto", employeeDto);
         return "employee/update";
     }
 
 
     @PostMapping("/update")
-    public String update(@Valid @ModelAttribute EmployeeDto employeeDto , BindingResult bindingResult) {
-        new EmployeeDto().validate(employeeDto,bindingResult);
-        if (bindingResult.hasFieldErrors()){
+    public String update(@Valid @ModelAttribute EmployeeDto employeeDto, BindingResult bindingResult) {
+        new EmployeeDto().validate(employeeDto, bindingResult);
+        if (bindingResult.hasFieldErrors()) {
             return "employee/update";
-        }else {
+        } else {
             Employee employee = new Employee();
             BeanUtils.copyProperties(employeeDto, employee);
             iEmployeeService.saveEmployee(employee);

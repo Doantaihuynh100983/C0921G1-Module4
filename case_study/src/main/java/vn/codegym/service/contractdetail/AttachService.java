@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 public class AttachService implements IAttachServiceService{
     @Autowired
-    IAttachServiceReposotory iAttachServiceReposotory;
+    private  IAttachServiceReposotory iAttachServiceReposotory;
     @Override
     public List<vn.codegym.model.AttachService> getAllAttachService() {
         return iAttachServiceReposotory.findAll();

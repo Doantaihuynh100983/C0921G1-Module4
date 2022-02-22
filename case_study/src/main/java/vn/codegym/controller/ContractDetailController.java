@@ -15,30 +15,32 @@ import vn.codegym.service.contractdetail.IContractDetailService;
 @RequestMapping("/contractDetail")
 public class ContractDetailController {
     @Autowired
-    IContractDetailService iContractDetailService;
+    private IContractDetailService iContractDetailService;
     @Autowired
-    IContractService iContractService ;
+    private IContractService iContractService;
     @Autowired
-    IAttachServiceService iAttachServiceService;
+    private IAttachServiceService iAttachServiceService;
+
     @GetMapping("/list")
-    public String getAllContractDetail(Model model){
-        model.addAttribute("contractDetail",iContractDetailService.getAllContractDetail());
+    public String getAllContractDetail(Model model) {
+        model.addAttribute("contractDetail", iContractDetailService.getAllContractDetail());
         return "contractdetail/list";
     }
 
     @GetMapping("/viewAddContractDetail/{id}")
-    public String viewAddContractDetail(Model model , @PathVariable Integer id){
+    public String viewAddContractDetail(Model model, @PathVariable Integer id) {
 
         Contract contract = iContractService.findByIdContract(id);
         ContractDetail contractDetail = new ContractDetail();
         contractDetail.setContractId(contract);
-        model.addAttribute("contractDetail",contractDetail);
-        model.addAttribute("attachService",iAttachServiceService.getAllAttachService());
+        model.addAttribute("contractDetail", contractDetail);
+        model.addAttribute("attachService", iAttachServiceService.getAllAttachService());
         return "contractdetail/add";
     }
+
     @PostMapping("/addContractDetail")
-    public String addContractDetail(@ModelAttribute ContractDetail contractDetail){
+    public String addContractDetail(@ModelAttribute ContractDetail contractDetail) {
         iContractDetailService.addContractDetail(contractDetail);
-        return  "redirect:/contractDetail/list";
+        return "redirect:/contractDetail/list";
     }
 }

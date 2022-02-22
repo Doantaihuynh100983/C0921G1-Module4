@@ -10,9 +10,9 @@ import vn.codegym.repository.service.IServiceRepository;
 import java.util.List;
 
 @Service
-public class ServiceSerivce implements IServiceService{
+public class ServiceSerivce implements IServiceService {
     @Autowired
-    IServiceRepository iServiceRepository;
+    private IServiceRepository iServiceRepository;
 
     @Override
     public List<vn.codegym.model.Service> getAllService() {
@@ -26,7 +26,7 @@ public class ServiceSerivce implements IServiceService{
 
     @Override
     public void addNewService(vn.codegym.model.Service service) {
-            iServiceRepository.save(service);
+        iServiceRepository.save(service);
     }
 
     @Override
