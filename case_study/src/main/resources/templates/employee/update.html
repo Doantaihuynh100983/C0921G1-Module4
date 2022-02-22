@@ -28,7 +28,7 @@
                             <div class="card mt-2 mx-auto p-4 bg-light">
                                 <div class="card-body bg-light">
                                     <div class="container">
-                                        <form id="contact-form" role="form" th:object="${employee}"
+                                        <form id="contact-form" role="form" th:object="${employeeDto}"
                                               action="/employee/update" method="post">
                                             <div class="controls">
                                                 <input type="hidden" th:field="*{employeeId}">
@@ -39,13 +39,21 @@
                                                             <label for="employeeName">Name *</label>
                                                             <input th:field="*{employeeName}" id="employeeName"
                                                                    type="text" name="employeeName" class="form-control"
-                                                                   required="required"></div>
+                                                                   required="required">
+                                                            <p style="color: red"
+                                                               th:if="${#fields.hasErrors('employeeName')}"
+                                                               th:errors="*{employeeName}"></p>
+                                                        </div>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="employeeBirthday">Birthday *</label>
                                                             <input th:field="*{employeeBirthday}" id="employeeBirthday"
-                                                                   class="form-control" required="required"></div>
+                                                                   class="form-control" required="required">
+                                                            <p style="color: red"
+                                                               th:if="${#fields.hasErrors('employeeBirthday')}"
+                                                               th:errors="*{employeeBirthday}"></p>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -56,6 +64,9 @@
                                                                    type="text" name="employeeIdCard"
                                                                    class="form-control"
                                                                    required="required">
+                                                            <p style="color: red"
+                                                               th:if="${#fields.hasErrors('employeeIdCard')}"
+                                                               th:errors="*{employeeIdCard}"></p>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
@@ -65,6 +76,9 @@
                                                                    type="text" name="employeeSalary"
                                                                    class="form-control"
                                                                    required="required">
+                                                            <p style="color: red"
+                                                               th:if="${#fields.hasErrors('employeeSalary')}"
+                                                               th:errors="*{employeeSalary}"></p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -75,7 +89,11 @@
                                                             <label for="employeePhone">PHONE *</label>
                                                             <input th:field="*{employeePhone}" id="employeePhone"
                                                                    type="text" name="employeePhone" class="form-control"
-                                                                   required="required"></div>
+                                                                   required="required">
+                                                            <p style="color: red"
+                                                               th:if="${#fields.hasErrors('employeePhone')}"
+                                                               th:errors="*{employeePhone}"></p>
+                                                        </div>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group">
@@ -84,6 +102,9 @@
                                                                    type="email" name="employeeEmail"
                                                                    class="form-control"
                                                                    required="required">
+                                                            <p style="color: red"
+                                                               th:if="${#fields.hasErrors('employeeEmail')}"
+                                                               th:errors="*{employeeEmail}"></p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -91,10 +112,14 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="employeeAdress">ADRESS *</label>
-                                                            <input th:field="*{employeeEmail}" id="employeeAdress"
+                                                            <input th:field="*{employeeAdress}" id="employeeAdress"
                                                                    type="text" name="employeeAdress"
                                                                    class="form-control"
-                                                                   required="required"></div>
+                                                                   required="required">
+                                                            <p style="color: red"
+                                                               th:if="${#fields.hasErrors('employeeAdress')}"
+                                                               th:errors="*{employeeAdress}"></p>
+                                                        </div>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group"><label>POSITION *</label>
@@ -104,6 +129,9 @@
                                                                         th:text="${ps.positionName}"
                                                                         th:value="${ps.positionId}"></option>
                                                             </select>
+                                                            <p style="color: red"
+                                                               th:if="${#fields.hasErrors('position')}"
+                                                               th:errors="*{position}"></p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -118,6 +146,9 @@
                                                                         th:value="${ed.educationDegreeID}"
                                                                         th:text="${ed.educationDegreeName}"></option>
                                                             </select>
+                                                            <p style="color: red"
+                                                               th:if="${#fields.hasErrors('educationDegree')}"
+                                                               th:errors="*{educationDegree}"></p>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
@@ -129,6 +160,9 @@
                                                                         th:value="${dv.divisionId}"
                                                                         th:text="${dv.divisionName}"></option>
                                                             </select>
+                                                            <p style="color: red"
+                                                               th:if="${#fields.hasErrors('division')}"
+                                                               th:errors="*{division}"></p>
                                                         </div>
                                                     </div>
                                                 </div>

@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-
 public class CustomerController {
     @Autowired
     ICustomerService iCustomerService;
@@ -54,6 +53,7 @@ public class CustomerController {
     @PostMapping("/viewNewAdd")
     public String addCustomer(@Valid @ModelAttribute CustomerDto customerDto,
                               BindingResult bindingResult) {
+        new CustomerDto().validate(customerDto,bindingResult);
         if (bindingResult.hasFieldErrors()) {
             return "customer/add";
         } else {
@@ -67,14 +67,26 @@ public class CustomerController {
 
     @GetMapping("/viewUpdateCustomer/{id}")
     public String viewUpdateCustomer(@PathVariable Integer id, Model model) {
-        model.addAttribute("customer", iCustomerService.findById(id));
+        Customer customer = iCustomerService.findById(id);
+        CustomerDto customerDto = new CustomerDto();
+        BeanUtils.copyProperties(customer,customerDto);
+        model.addAttribute("customerDto", customerDto);
         return "customer/update";
     }
 
     @PostMapping("/updateCustomer")
-    public String updateCustomer(@ModelAttribute Customer customer) {
-        iCustomerService.saveCustomer(customer);
-        return "redirect:/customer";
+    public String updateCustomer( @Valid @ModelAttribute CustomerDto customerDto ,
+                                  BindingResult bindingResult) {
+        new CustomerDto().validate(customerDto,bindingResult);
+        if (bindingResult.hasFieldErrors()){
+            return "customer/update";
+        }else {
+            Customer customer = new Customer();
+            BeanUtils.copyProperties(customerDto, customer);
+            iCustomerService.saveCustomer(customer);
+            return "redirect:/customer";
+        }
+
     }
 
     @GetMapping("/viewsByIdCustomer/{id}")

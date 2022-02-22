@@ -2,6 +2,7 @@ package vn.codegym.model;
 
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -10,7 +11,7 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer customerId;
     private String customerName;
-    private String customerBirthday;
+    private Date customerBirthday;
     private Boolean customerGender;
     private String customerIdCard;
     private String customerPhone;
@@ -44,11 +45,11 @@ public class Customer {
         this.customerName = customerName;
     }
 
-    public String getCustomerBirthday() {
+    public Date getCustomerBirthday() {
         return customerBirthday;
     }
 
-    public void setCustomerBirthday(String customerBirthday) {
+    public void setCustomerBirthday(Date customerBirthday) {
         this.customerBirthday = customerBirthday;
     }
 

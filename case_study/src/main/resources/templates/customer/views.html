@@ -19,7 +19,8 @@
         </tr>
         <tr>
             <td height="col">Birthday</td>
-            <td height="col" th:text="${c.customerBirthday}"></td>
+<!--            <td height="col" th:text="${c.customerBirthday}"></td>-->
+            <td th:text="${#calendars.format(c.customerBirthday,'dd/MM/yyyy')}"></td>
         </tr>
         <tr>
             <td height="col">Gender</td>

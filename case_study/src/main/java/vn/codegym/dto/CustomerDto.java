@@ -1,46 +1,58 @@
 package vn.codegym.dto;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
 import vn.codegym.model.CustomerType;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-public class CustomerDto {
+public class CustomerDto implements Validator {
 
     private Integer customerId;
 
-//    @NotEmpty(message = "Không dùng dấu cách nhé !!!")
-//    @Pattern(regexp = "^[a-zA-Z]+$", message = "Định Dạng Sai !!")
+    @NotEmpty(message = "Do not use spaces !!!")
+    @Pattern(regexp = "^[\\p{Lu}\\p{Ll}\\s0-9]*$", message = "Format Wrong!!")
     private String customerName;
 
-    private String customerBirthday;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date customerBirthday;
 
+    @NotNull(message = "Mandatory Choose !!")
     private Boolean customerGender;
 
 
-//    @NotEmpty(message = "Không dùng dấu cách nhé !!!")
-//    @Pattern(regexp = "^\\d{12}|\\d{9}$", message = "Định Dạng Sai !!")
+    @NotEmpty(message = "Do not use spaces !!!")
+    @Pattern(regexp = "^\\d{9,10}$", message = "Format Wrong!!")
     private String customerIdCard;
 
-
+    @NotEmpty(message = "Do not use spaces !!!")
+    @Pattern(regexp = "^(84+|0)(90|91)[0-9]{7}$", message = "Format Wrong!!")
     private String customerPhone;
 
 
-//    @NotEmpty(message = "Không dùng dấu cách nhé !!!")
-//    @Pattern(regexp = "^\\w+@\\w+[.]\\w+$", message = "Định Dạng Sai !!")
+    @NotEmpty(message = "Do not use spaces !!!")
+    @Pattern(regexp = "^[A-Za-z0-9._]+[@][A-Za-z0-9._]+[.][A-Za-z0-9._]+$", message = "Format Wrong!!")
     private String customerEmail;
 
 
-
+    @NotEmpty(message = "Do not use spaces !!!")
+    @Pattern(regexp = "^[\\p{Lu}\\p{Ll}\\s0-9]*$", message = "Format Wrong!!")
     private String customerAddress;
-    //adrees với phone chưa validate
+
+    @NotNull(message = "Mandatory Choose !!")
     private CustomerType customerType;
 
     public CustomerDto() {
     }
 
-    public CustomerDto(Integer customerId, String customerName, String customerBirthday, Boolean customerGender,
+    public CustomerDto(Integer customerId, String customerName, Date customerBirthday, Boolean customerGender,
                        String customerIdCard, String customerPhone, String customerEmail, String customerAddress) {
         this.customerId = customerId;
         this.customerName = customerName;
@@ -68,11 +80,11 @@ public class CustomerDto {
         this.customerName = customerName;
     }
 
-    public String getCustomerBirthday() {
+    public Date getCustomerBirthday() {
         return customerBirthday;
     }
 
-    public void setCustomerBirthday(String customerBirthday) {
+    public void setCustomerBirthday(Date customerBirthday) {
         this.customerBirthday = customerBirthday;
     }
 
@@ -122,5 +134,31 @@ public class CustomerDto {
 
     public void setCustomerType(CustomerType customerType) {
         this.customerType = customerType;
+    }
+
+
+    @Override
+    public boolean supports(Class<?> clazz) {
+        return false;
+    }
+
+    @Override
+    public void validate(Object target, Errors errors) {
+
+        CustomerDto customerDto = (CustomerDto) target;
+        if (customerDto.customerBirthday == null) {
+            errors.rejectValue("customerBirthday", "customerBirthday.wrongBirth", "Birthday must no be blank");
+        } else {
+            DateFormat formatter = new SimpleDateFormat("yyyyMMdd");
+            long millis = System.currentTimeMillis();
+            Date curDate = new java.sql.Date(millis);
+            int empBirth = Integer.parseInt(formatter.format(customerDto.customerBirthday));
+            int curentDate = Integer.parseInt(formatter.format(curDate));
+
+            int age = (curentDate - empBirth) / 10000;
+            if (age < 18) {
+                errors.rejectValue("customerBirthday", "customerBirthday.wrongAge", "Customer age must not smaller than 18");
+            }
+        }
     }
 }

@@ -2,6 +2,7 @@ package vn.codegym.model;
 
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -10,7 +11,7 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer employeeId;
     private String employeeName;
-    private String employeeBirthday;
+    private Date employeeBirthday;
     private String employeeIdCard;
     private Double employeeSalary;
     private String employeePhone;
@@ -35,7 +36,9 @@ public class Employee {
     private List<Contract> contract;
 
 
-
+//    @ManyToOne
+//    @JoinColumn(name = "userName" , referencedColumnName = "userName")
+//    private User user;
 
 
     public Employee() {
@@ -67,11 +70,11 @@ public class Employee {
         this.employeeName = employeeName;
     }
 
-    public String getEmployeeBirthday() {
+    public Date getEmployeeBirthday() {
         return employeeBirthday;
     }
 
-    public void setEmployeeBirthday(String employeeBirthday) {
+    public void setEmployeeBirthday(Date employeeBirthday) {
         this.employeeBirthday = employeeBirthday;
     }
 
