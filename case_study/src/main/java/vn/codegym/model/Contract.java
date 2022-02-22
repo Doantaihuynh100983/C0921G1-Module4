@@ -1,6 +1,7 @@
 package vn.codegym.model;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.util.List;
 
 @Entity
@@ -8,8 +9,8 @@ public class Contract {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int contractId;
-    private String contractStartDate;
-    private String contrachEndDate;
+    private Date contractStartDate;
+    private Date contrachEndDate;
     private double contractDeposit;
     private double contractTotalMoney;
 
@@ -36,7 +37,7 @@ public class Contract {
     }
 
 
-    public Contract(int contractId, String contractStartDate, String contrachEndDate, double contractDeposit, double contractTotalMoney,
+    public Contract(int contractId, Date contractStartDate, Date contrachEndDate, double contractDeposit, double contractTotalMoney,
                     Employee employeeId, List<ContractDetail> contractDetails) {
         this.contractId = contractId;
         this.contractStartDate = contractStartDate;
@@ -79,19 +80,19 @@ public class Contract {
         this.contractId = contractId;
     }
 
-    public String getContractStartDate() {
+    public Date getContractStartDate() {
         return contractStartDate;
     }
 
-    public void setContractStartDate(String contractStartDate) {
+    public void setContractStartDate(Date contractStartDate) {
         this.contractStartDate = contractStartDate;
     }
 
-    public String getContrachEndDate() {
+    public Date getContrachEndDate() {
         return contrachEndDate;
     }
 
-    public void setContrachEndDate(String contrachEndDate) {
+    public void setContrachEndDate(Date contrachEndDate) {
         this.contrachEndDate = contrachEndDate;
     }
 

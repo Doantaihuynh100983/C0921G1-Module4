@@ -29,24 +29,32 @@
                                 <div class="card-body bg-light">
                                     <div class="container">
                                         <form id="contact-form" role="form" method="post" action="/service/addService"
-                                              th:object="${service}">
+                                              th:object="${serviceDto}">
                                             <div class="controls">
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="serviceName">Name *</label>
-                                                            <input id="serviceName" type="text" name="serviceName"
+                                                            <input id="serviceName" type="text" th:field="*{serviceName}"
                                                                    class="form-control"
                                                                    placeholder="Please enter your Name *"
-                                                                   required="required"></div>
+                                                                   required="required">
+                                                            <p style="color: red"
+                                                               th:if="${#fields.hasErrors('serviceName')}"
+                                                               th:errors="*{serviceName}"></p>
+                                                        </div>
 
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group"><label for="serviceArea">Service Area
                                                             *</label> <input id="serviceArea" type="text"
-                                                                             name="serviceArea"
+                                                                             th:field="*{serviceArea}"
                                                                              placeholder="Please enter your Service Area *"
                                                                              class="form-control" required="required">
+                                                            <p style="color: red"
+                                                               th:if="${#fields.hasErrors('serviceArea')}"
+                                                               th:errors="*{serviceArea}"></p>
+
                                                         </div>
                                                     </div>
                                                 </div>
@@ -54,20 +62,26 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="serviceCost">Service Cost *</label>
-                                                            <input id="serviceCost" type="text" name="serviceCost"
+                                                            <input id="serviceCost" type="text"  th:field="*{serviceCost}"
                                                                    class="form-control"
                                                                    placeholder="Please enter your Service Cost  *"
                                                                    required="required">
+                                                            <p style="color: red"
+                                                               th:if="${#fields.hasErrors('serviceCost')}"
+                                                               th:errors="*{serviceCost}"></p>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="serviceMaxPeople">Service Max People *</label>
                                                             <input id="serviceMaxPeople" type="text"
-                                                                   name="serviceMaxPeople"
+                                                                    th:field="*{serviceMaxPeople}"
                                                                    class="form-control"
                                                                    placeholder="Please enter your Service Max People *"
                                                                    required="required">
+                                                            <p style="color: red"
+                                                               th:if="${#fields.hasErrors('serviceMaxPeople')}"
+                                                               th:errors="*{serviceMaxPeople}"></p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -77,58 +91,87 @@
                                                                 for="descriptionOtherConvenience">Description
                                                             *</label> <input id="descriptionOtherConvenience"
                                                                              type="text"
-                                                                             name="descriptionOtherConvenience"
+                                                                             th:field="*{descriptionOtherConvenience}"
                                                                              class="form-control"
                                                                              placeholder="Please enter your Standand Description *"
-                                                                             required="required"></div>
+                                                                             required="required">
+                                                            <p style="color: red"
+                                                               th:if="${#fields.hasErrors('descriptionOtherConvenience')}"
+                                                               th:errors="*{descriptionOtherConvenience}"></p>
+                                                        </div>
                                                     </div>
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="poolArea">Pool Area *</label>
-                                                            <input id="poolArea" type="text" name="poolArea"
-                                                                   class="form-control"
+                                                            <input id="poolArea" type="text"
+                                                                   class="form-control"    th:field="*{poolArea}"
                                                                    placeholder="Please enter your Pool Area *"
                                                                    required="required">
+                                                            <p style="color: red"
+                                                               th:if="${#fields.hasErrors('poolArea')}"
+                                                               th:errors="*{poolArea}"></p>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group"><label for="standandRoom">Standand Room
+                                                            Floors
+                                                            *</label> <input id="standandRoom" type="text"
+                                                                             th:field="*{standandRoom}"
+                                                                             name="standandRoom" class="form-control"
+                                                                             placeholder="Please enter your Standand Room *"
+                                                                             required="required">
+                                                            <p style="color: red"
+                                                               th:if="${#fields.hasErrors('standandRoom')}"
+                                                               th:errors="*{standandRoom}"></p>
+                                                        </div>
+                                                    </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group"><label for="numberOfFloors">Number Of
                                                             Floors
                                                             *</label> <input id="numberOfFloors" type="text"
-                                                                             name="numberOfFloors" class="form-control"
+                                                                             th:field="*{numberOfFloors}"
+                                                                              class="form-control"
                                                                              placeholder="Please enter your Number Of Floors *"
-                                                                             required="required"></div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group"><label for="serviceType">Service Type
-                                                            *</label>
-                                                            <select id="serviceType" name="serviceType"
-                                                                    class="form-control"
-                                                                    required="required">
-                                                                <option selected disabled>--Select Service Type--
-                                                                </option>
-                                                                <option th:each="svt : ${serviceTypeService}"
-                                                                        th:text="${svt.serviceTypeName}"
-                                                                        th:value="${svt.serviceTypeId}"></option>
-                                                            </select>
+                                                                             required="required">
+                                                            <p style="color: red"
+                                                               th:if="${#fields.hasErrors('numberOfFloors')}"
+                                                               th:errors="*{numberOfFloors}"></p>
                                                         </div>
                                                     </div>
 
+
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-md-12">
+                                                    <div class="col-md-6">
                                                         <div class="form-group"><label for="rentType">Rent Type
                                                             *</label>
                                                             <select id="rentType" name="rentType" class="form-control"
-                                                                    required="required">
-                                                                <option selected disabled>--Select Rent Type--</option>
+                                                                    required="required"    th:field="*{rentType}">
                                                                 <option th:each="rt : ${rentType}"
                                                                         th:text="${rt.rentTypeName}"
                                                                         th:value="${rt.rentTypeId}"></option>
                                                             </select>
+                                                            <p style="color: red"
+                                                               th:if="${#fields.hasErrors('rentType')}"
+                                                               th:errors="*{rentType}"></p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group"><label for="serviceType">Service Type
+                                                            *</label>
+                                                            <select id="serviceType"
+                                                                    class="form-control"  th:field="*{serviceType}"
+                                                                    required="required">
+                                                                <option th:each="svt : ${serviceTypeService}"
+                                                                        th:text="${svt.serviceTypeName}"
+                                                                        th:value="${svt.serviceTypeId}"></option>
+                                                            </select>
+                                                            <p style="color: red"
+                                                               th:if="${#fields.hasErrors('serviceType')}"
+                                                               th:errors="*{serviceType}"></p>
                                                         </div>
                                                     </div>
                                                 </div>

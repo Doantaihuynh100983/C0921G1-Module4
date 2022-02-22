@@ -47,8 +47,10 @@ public class EmployeeDto implements Validator {
 
     @NotNull(message = "Mandatory Choose !!")
     private Position position;
+
     @NotNull(message = "Mandatory Choose !!")
     private EducationDegree educationDegree;
+
     @NotNull(message = "Mandatory Choose !!")
     private Division division;
 
