@@ -13,11 +13,15 @@ import vn.codegym.model.Customer;
 @Transactional
 @Repository
 public interface ICustomerRepository extends JpaRepository<Customer,Integer> {
-    void deleteByCustomerId(Integer id);
+
+
+    @Modifying
+    @Query(value = "UPDATE Customer SET flag_delete_customer = 0 WHERE  customer_id = :customer_id " ,nativeQuery=true)
+    void deleteByCustomerId(@Param("customer_id") Integer id);
 
 
     @Query(value="SELECT * FROM  Customer where customer_name like concat('%',:customerName,'%') " +
-            " and  customer_address like concat('%',:customerAdress,'%')  and customer_type_id like concat('%',:customerTypeId,'%')", nativeQuery=true)
+            " and  customer_address like concat('%',:customerAdress,'%')  and customer_type_id like concat('%',:customerTypeId,'%') and flag_delete_customer = 1", nativeQuery=true)
     Page<Customer> searchCustomer(@Param("customerName") String customerName,
                                   @Param("customerAdress") String customerAdress,
                                   @Param("customerTypeId") String customerTypeId,

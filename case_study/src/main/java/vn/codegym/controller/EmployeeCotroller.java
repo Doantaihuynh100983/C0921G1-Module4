@@ -4,18 +4,24 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.core.context.SecurityContextImpl;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import vn.codegym.dto.EmployeeDto;
 import vn.codegym.model.*;
+import vn.codegym.repository.UserRepository;
+import vn.codegym.security.MyUserDetail;
 import vn.codegym.service.employee.IDivisionService;
 import vn.codegym.service.employee.IEducationService;
 import vn.codegym.service.employee.IEmployeeService;
 import vn.codegym.service.employee.IPositionService;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -29,6 +35,15 @@ public class EmployeeCotroller {
     private IEducationService iEducationService;
     @Autowired
     private IDivisionService iDivisionService;
+    @Autowired
+    private UserRepository userRepository;
+
+    @ModelAttribute("user")
+    public User user(HttpSession session) {
+        SecurityContextImpl securityContext = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
+        MyUserDetail myUserDetail = (MyUserDetail) securityContext.getAuthentication().getPrincipal();
+        return myUserDetail.getUser();
+    }
 
     @GetMapping("/list")
     public String getAllList(Model model,
@@ -37,15 +52,20 @@ public class EmployeeCotroller {
                              @RequestParam(defaultValue = "") String employeeAdress,
                              @RequestParam(defaultValue = "") String position,
                              @RequestParam(defaultValue = "") String educationDegree,
-                             @RequestParam(defaultValue = "") String division) {
+                             @RequestParam(defaultValue = "") String division
+                             ) {
+
         model.addAttribute("employee", iEmployeeService.seachEmployee(employeeName, employeeAdress, position, educationDegree, division, pageable));
         model.addAttribute("employeeName", employeeName);
         model.addAttribute("employeeAdress", employeeAdress);
         model.addAttribute("position1", position);
         model.addAttribute("educationDegree1", educationDegree);
         model.addAttribute("division1", division);
+
         return "employee/list";
     }
+
+
 
     @GetMapping("/viewAdd")
     public String viewAdd(Model model) {
@@ -62,7 +82,23 @@ public class EmployeeCotroller {
         } else {
             Employee employee = new Employee();
             BeanUtils.copyProperties(employeeDto, employee);
+            employee.setFlagDeleteEmployee(1);
             iEmployeeService.saveEmployee(employee);
+
+
+            User user = new User();
+            user.setEmployee(employee);
+            user.setUserName(employeeDto.getUsername());
+            BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+            user.setPassWord(bCryptPasswordEncoder.encode("123"));
+
+
+            List<Role> roles = new ArrayList<>();
+            Role role = new Role();
+            role.setRoleId(2);
+            roles.add(role);
+            user.setRole(roles);
+            userRepository.save(user);
             return "redirect:/employee/list";
         }
 
@@ -87,6 +123,7 @@ public class EmployeeCotroller {
         } else {
             Employee employee = new Employee();
             BeanUtils.copyProperties(employeeDto, employee);
+            employee.setFlagDeleteEmployee(1);
             iEmployeeService.saveEmployee(employee);
             return "redirect:/employee/list";
         }
@@ -117,8 +154,8 @@ public class EmployeeCotroller {
     }
 
 
-    @GetMapping("/delete/{id}")
-    public String delete(@PathVariable int id) {
+    @GetMapping("/delete")
+    public String delete(@RequestParam int id) {
         iEmployeeService.deleteByEmployeeId(id);
         return "redirect:/employee/list";
     }

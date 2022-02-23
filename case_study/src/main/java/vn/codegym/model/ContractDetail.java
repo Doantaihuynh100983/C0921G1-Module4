@@ -20,6 +20,9 @@ public class ContractDetail {
     @JoinColumn(name = "attachServiceId" ,referencedColumnName =  "attachServiceId")
     private AttachService attachServiceId;
 
+    @Column(columnDefinition = "integer default 1")
+    private Integer flagDeleteContractDetail ;
+
 
     public ContractDetail() {
     }
@@ -52,5 +55,13 @@ public class ContractDetail {
 
     public void setAttachServiceId(AttachService attachServiceId) {
         this.attachServiceId = attachServiceId;
+    }
+
+    public Integer getFlagDeleteContractDetail() {
+        return flagDeleteContractDetail;
+    }
+
+    public void setFlagDeleteContractDetail(Integer flagDeleteContractDetail) {
+        this.flagDeleteContractDetail = flagDeleteContractDetail;
     }
 }

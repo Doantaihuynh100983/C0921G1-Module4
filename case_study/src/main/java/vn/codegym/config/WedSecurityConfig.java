@@ -9,6 +9,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.rememberme.InMemoryTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import vn.codegym.security.MyUserDetailService;
 
 @Configuration
@@ -28,6 +30,25 @@ public class WedSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-       //tới đây rồi còn phân quyền và thêm dữ liệu vào db là ok 
+       http.csrf().disable();
+       http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/403");
+       http.formLogin()
+               .loginPage("/login")
+               .defaultSuccessUrl("/customer/list").permitAll()
+               .and().authorizeRequests()
+               .antMatchers("/customer/**").hasAnyRole("EMPLOYEE","ADMIN")
+               .antMatchers("/service/**").hasAnyRole("EMPLOYEE","ADMIN")
+               .antMatchers("/**").hasRole("ADMIN")
+               .anyRequest().authenticated();
+        /*Cấu hình remember me*/
+        http.authorizeRequests().and().rememberMe()
+                .tokenRepository(this.persistentTokenRepository()).tokenValiditySeconds(60*60*24);
+        http.logout().logoutSuccessUrl("/login");
+    }
+    /*Cấu hình nơi lưu thông tin login*/
+    @Bean
+    public PersistentTokenRepository persistentTokenRepository(){
+        InMemoryTokenRepositoryImpl inMemoryTokenRepository = new InMemoryTokenRepositoryImpl();
+        return inMemoryTokenRepository;
     }
 }

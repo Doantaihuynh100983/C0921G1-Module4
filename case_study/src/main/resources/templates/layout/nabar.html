@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head>
         <meta charset="UTF-8">
         <title>Title</title>
@@ -7,6 +7,7 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
               crossorigin="anonymous">
+
     </head>
     <body>
 
@@ -20,25 +21,39 @@
                     <i class="fas fa-bars"></i>
                 </button>
 
+
                 <!-- Collapsible wrapper -->
                 <div class="collapse navbar-collapse justify-content-center menuTest" id="navbarCenteredExample">
                     <!-- Left links -->
                     <ul class="navbar-nav mb-2 mb-lg-0">
-                        <li class="nav-item">
+                        <li class="nav-item" style=" padding: 0 58px">
                             <a class="nav-link " aria-current="page" href="/employee/list">EMPLOYEE</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item" style=" padding: 0 58px">
                             <a class="nav-link" href="/customer/list">CUSTOMER</a>
                         </li>
 
-                        <li class="nav-item">
+                        <li class="nav-item" style=" padding: 0 58px">
                             <a class="nav-link " href="/service/list">SERVICE</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item" style=" padding: 0 58px">
                             <a class="nav-link " href="/contract/list">CONTACT</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item" style=" padding: 0 58px">
                             <a class="nav-link " href="/contractDetail/list">CONTACT DETAIL</a>
+                        </li>
+                        <li class="nav-item " style=" padding: 0 58px">
+                            <div sec:authorize="isAuthenticated()">
+
+                                <span class="nav-link" sec:authentication="principal.nameEmployee"
+                                      style=" display: inline-block ;  background: red ; color: #2D1C2D"></span>
+                                |
+                                <a href="/logout" style="background: yellow ;text-decoration: none ;color: #2D1C2D">
+                                    Login
+                                </a>
+
+                            </div>
+
                         </li>
 
                     </ul>

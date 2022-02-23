@@ -14,6 +14,8 @@ public class Contract {
     private double contractDeposit;
     private double contractTotalMoney;
 
+    @Column(columnDefinition = "integer default 1")
+    private Integer flagDeleteContract ;
 
     @ManyToOne
     @JoinColumn(name = "employeeId" ,referencedColumnName =  "employeeId")
@@ -118,5 +120,13 @@ public class Contract {
 
     public void setEmployeeId(Employee employeeId) {
         this.employeeId = employeeId;
+    }
+
+    public Integer getFlagDeleteContract() {
+        return flagDeleteContract;
+    }
+
+    public void setFlagDeleteContract(Integer flagDeleteContract) {
+        this.flagDeleteContract = flagDeleteContract;
     }
 }

@@ -33,4 +33,9 @@ public class ServiceSerivce implements IServiceService {
     public void deleteService(Integer id) {
         iServiceRepository.deleteByServiceId(id);
     }
+
+    @Override
+    public Page<vn.codegym.model.Service> searchService(String serviceName, String rentType, String serviceType, Pageable pageable) {
+        return iServiceRepository.searchService(serviceName,rentType,serviceType,pageable);
+    }
 }

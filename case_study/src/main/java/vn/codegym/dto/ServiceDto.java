@@ -47,6 +47,8 @@ public class ServiceDto implements Validator {
     @NotNull(message = "Mandatory Choose !!")
     private RentType rentType;
 
+    private Integer flagDeleteService ;
+
     public ServiceDto(Integer serviceId, String serviceName, Integer serviceArea, Double serviceCost,
                       Integer serviceMaxPeople, String standandRoom, String descriptionOtherConvenience,
                       Double poolArea, Integer numberOfFloors, ServiceType serviceType, RentType rentType) {
@@ -152,6 +154,14 @@ public class ServiceDto implements Validator {
 
     public void setNumberOfFloors(Integer numberOfFloors) {
         this.numberOfFloors = numberOfFloors;
+    }
+
+    public Integer getFlagDeleteService() {
+        return flagDeleteService;
+    }
+
+    public void setFlagDeleteService(Integer flagDeleteService) {
+        this.flagDeleteService = flagDeleteService;
     }
 
     @Override

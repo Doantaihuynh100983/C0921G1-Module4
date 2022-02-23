@@ -6,30 +6,26 @@ import java.util.List;
 @Entity
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
     private String userName;
     private String passWord;
 
 
-    @OneToOne(mappedBy = "user")
-    private Employee employee;
-
-
-    @ManyToMany(fetch = FetchType.EAGER) // loại bỏ đệ quy dữ liệu thường
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "use_role",
-            joinColumns = @JoinColumn(name = "user_id" ),
+            joinColumns = @JoinColumn(name = "user_name" ),
             inverseJoinColumns = @JoinColumn(name = "role_id" )
     )
     private List<Role> role;
 
 
-    public User(Integer id, String userName, String passWord) {
-        this.id = id;
-        this.userName = userName;
-        this.passWord = passWord;
-    }
+    @OneToOne
+    @JoinColumn(name = "employeeId" , referencedColumnName = "employeeId")
+    private Employee employee;
+
+
+
+
 
 
     public List<Role> getRole() {
@@ -43,13 +39,6 @@ public class User {
     public User() {
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getUserName() {
         return userName;
@@ -65,5 +54,13 @@ public class User {
 
     public void setPassWord(String passWord) {
         this.passWord = passWord;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 }

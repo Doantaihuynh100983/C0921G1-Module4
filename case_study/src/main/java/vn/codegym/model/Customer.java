@@ -19,6 +19,9 @@ public class Customer {
     private String customerAddress;
 
 
+    @Column(columnDefinition = "integer default 1")
+    private Integer flagDeleteCustomer ;
+
     @OneToMany(mappedBy = "customerId")
     private List<Contract> contracts;
 
@@ -107,5 +110,13 @@ public class Customer {
 
     public void setCustomerType(CustomerType customerType) {
         this.customerType = customerType;
+    }
+
+    public Integer getFlagDeleteCustomer() {
+        return flagDeleteCustomer;
+    }
+
+    public void setFlagDeleteCustomer(Integer flagDeleteCustomer) {
+        this.flagDeleteCustomer = flagDeleteCustomer;
     }
 }

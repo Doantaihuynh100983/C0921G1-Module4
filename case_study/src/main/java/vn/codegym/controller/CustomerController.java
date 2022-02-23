@@ -58,6 +58,7 @@ public class CustomerController {
         } else {
             Customer customer = new Customer();
             BeanUtils.copyProperties(customerDto, customer);
+            customer.setFlagDeleteCustomer(1);
             iCustomerService.saveCustomer(customer);
             return "redirect:/customer/list";
         }
@@ -82,6 +83,7 @@ public class CustomerController {
         } else {
             Customer customer = new Customer();
             BeanUtils.copyProperties(customerDto, customer);
+            customer.setFlagDeleteCustomer(1);
             iCustomerService.saveCustomer(customer);
             return "redirect:/customer/list";
         }
@@ -94,11 +96,15 @@ public class CustomerController {
         return "customer/views";
     }
 
-    @GetMapping("/delete/{id}")
-    public String deleteCustomer(@PathVariable int id) {
+    @GetMapping("/delete")
+    public String deleteCustomer(@RequestParam int id) {
         iCustomerService.deleteCustomer(id);
         return "redirect:/customer/list";
     }
+
+
+
+
 
 
 }

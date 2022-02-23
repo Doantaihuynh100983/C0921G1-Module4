@@ -49,6 +49,8 @@ public class CustomerDto implements Validator {
     @NotNull(message = "Mandatory Choose !!")
     private CustomerType customerType;
 
+    private Integer flagDeleteCustomer ;
+
     public CustomerDto() {
     }
 
@@ -136,6 +138,13 @@ public class CustomerDto implements Validator {
         this.customerType = customerType;
     }
 
+    public Integer getFlagDeleteCustomer() {
+        return flagDeleteCustomer;
+    }
+
+    public void setFlagDeleteCustomer(Integer flagDeleteCustomer) {
+        this.flagDeleteCustomer = flagDeleteCustomer;
+    }
 
     @Override
     public boolean supports(Class<?> clazz) {

@@ -54,25 +54,29 @@ public class EmployeeDto implements Validator {
     @NotNull(message = "Mandatory Choose !!")
     private Division division;
 
+    private Integer flagDeleteEmployee ;
+
+    private String username;
+
+    private String password;
 
     public EmployeeDto() {
     }
 
-    public EmployeeDto(Integer employeeId, String employeeName, Date employeeBirthday,
-                       String employeeIdCard, Double employeeSalary, String employeePhone,
-                       String employeeEmail, String employeeAdress,
-                       Position position, EducationDegree educationDegree, Division division) {
-        this.employeeId = employeeId;
-        this.employeeName = employeeName;
-        this.employeeBirthday = employeeBirthday;
-        this.employeeIdCard = employeeIdCard;
-        this.employeeSalary = employeeSalary;
-        this.employeePhone = employeePhone;
-        this.employeeEmail = employeeEmail;
-        this.employeeAdress = employeeAdress;
-        this.position = position;
-        this.educationDegree = educationDegree;
-        this.division = division;
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Integer getEmployeeId() {
@@ -161,6 +165,14 @@ public class EmployeeDto implements Validator {
 
     public void setDivision(Division division) {
         this.division = division;
+    }
+
+    public Integer getFlagDeleteEmployee() {
+        return flagDeleteEmployee;
+    }
+
+    public void setFlagDeleteEmployee(Integer flagDeleteEmployee) {
+        this.flagDeleteEmployee = flagDeleteEmployee;
     }
 
     @Override

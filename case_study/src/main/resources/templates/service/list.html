@@ -23,13 +23,30 @@
                         <div class="p-2 flex-grow-1 bd-highlight">
                             <a type="button" class="btn btn-outline-primary"  href="/service/viewAdd">THÊM MỚI DỊCH VỤ</a>
                         </div>
-                        <form action="/employee/list">
+                        <form action="/service/list">
 
                             <div class="d-flex bd-highlight">
                                 <div class="p-2 flex-fill bd-highlight">
-                                    <input type="text" id="employeeName" name="employeeName" placeholder="Tên Dịch Vụ"
+                                    <input type="text" id="serviceName" name="serviceName" placeholder="Tên Dịch Vụ"
                                            style="width:200px;height: 38px">
                                 </div>
+                                <div class="p-2 flex-fill bd-highlight">
+                                    <select id="rentType" style="width:100px;height: 38px" name="rentType">
+                                        <option selected disabled>Loại Thuê</option>
+                                        <option th:each="rt : ${rentType}" th:text="${rt.rentTypeName}"
+                                                th:value="${rt.rentTypeId}"></option>
+                                    </select>
+                                </div>
+                                <div class="p-2 flex-fill bd-highlight">
+                                    <select id="serviceType" style="width:150px;height: 38px" name="serviceType">
+                                        <option selected disabled>Loại Dịch Vụ</option>
+                                        <option th:each="svt : ${serviceTypeService}" th:text="${svt.serviceTypeName}"
+                                                th:value="${svt.serviceTypeId}"></option>
+                                    </select>
+                                </div>
+
+
+
                                 <div class="p-2 flex-fill bd-highlight">
                                     <button type="submit" class="btn btn-outline-primary">TÌM KIẾM</button>
                                 </div>
@@ -162,7 +179,7 @@
             console.log(id)
             $.ajax({
                 type: "GET",
-                url: "/service/delete/" + id,
+                url: "/service/delete?id=" + id,
                 dataType: "HTML",
                 success: function (data) {
                     $('.modalSv').modal('hide');

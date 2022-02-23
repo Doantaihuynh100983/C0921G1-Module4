@@ -1,5 +1,5 @@
 .menuTest ul li {
-    padding: 0 70px;
+    padding: 0 58px !important;
 }
 
 .menuTest ul li a {
@@ -52,3 +52,5 @@ label {
 .content_01{
     width: 100%;
 }
+
+

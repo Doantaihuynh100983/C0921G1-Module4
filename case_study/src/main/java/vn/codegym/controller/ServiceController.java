@@ -2,6 +2,8 @@ package vn.codegym.controller;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -27,8 +29,13 @@ public class ServiceController {
     private IServiceTypeService iServiceTypeService;
 
     @GetMapping("/list")
-    public String getAllService(Model model) {
-        model.addAttribute("service", iServiceService.getAllService());
+    public String getAllService(Model model,
+                                @RequestParam(defaultValue = "") String serviceName ,
+                                @RequestParam(defaultValue = "") String rentType ,
+                                @RequestParam(defaultValue = "") String serviceType,
+                                @PageableDefault(value = 5) Pageable pageable) {
+            model.addAttribute("service", iServiceService.searchService(serviceName,rentType,serviceType,pageable));
+//        model.addAttribute("service", iServiceService.getAllService());
         return "service/list";
     }
 
@@ -52,6 +59,7 @@ public class ServiceController {
         } else {
             Service service = new Service();
             BeanUtils.copyProperties(serviceDto, service);
+            service.setFlagDeleteService(1);
             iServiceService.addNewService(service);
             return "redirect:/service/list";
         }
@@ -76,13 +84,14 @@ public class ServiceController {
         } else {
             Service service = new Service();
             BeanUtils.copyProperties(serviceDto, service);
+            service.setFlagDeleteService(1);
             iServiceService.addNewService(service);
             return "redirect:/service/list";
         }
     }
 
-    @GetMapping("/delete/{id}")
-    public String delete(@PathVariable Integer id) {
+    @GetMapping("/delete")
+    public String delete(@RequestParam Integer id) {
         iServiceService.deleteService(id);
         return "redirect:/service/list";
     }
@@ -96,4 +105,7 @@ public class ServiceController {
     public List<ServiceType> getAllServiceTypeService() {
         return iServiceTypeService.getAllServiceType();
     }
+
+
+    //đang làm phân trang
 }

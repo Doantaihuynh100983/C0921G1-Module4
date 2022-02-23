@@ -26,6 +26,10 @@ public class MyUserDetail implements UserDetails {
         return grantedAuthorities;
     }
 
+    public User getUser() {
+        return user;
+    }
+
     @Override
     public String getPassword() {
         return user.getPassWord();
@@ -54,5 +58,9 @@ public class MyUserDetail implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public String getNameEmployee(){
+        return user.getEmployee().getEmployeeName();
     }
 }

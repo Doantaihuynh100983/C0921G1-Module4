@@ -1,6 +1,8 @@
 package vn.codegym.model;
 
 
+import net.bytebuddy.implementation.bind.annotation.Default;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -17,6 +19,9 @@ public class Employee {
     private String employeePhone;
     private String employeeEmail;
     private String employeeAdress;
+
+    @Column(columnDefinition = "integer default 1")
+    private Integer flagDeleteEmployee ;
 
     @ManyToOne
     @JoinColumn(name = "positionId" , referencedColumnName = "positionId")
@@ -36,8 +41,7 @@ public class Employee {
     private List<Contract> contract;
 
 
-    @OneToOne
-    @JoinColumn(name = "userName" , referencedColumnName = "userName")
+    @OneToOne(mappedBy = "employee")
     private User user;
 
 
@@ -140,5 +144,21 @@ public class Employee {
 
     public void setContract(List<Contract> contract) {
         this.contract = contract;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Integer getFlagDeleteEmployee() {
+        return flagDeleteEmployee;
+    }
+
+    public void setFlagDeleteEmployee(Integer flagDeleteEmployee) {
+        this.flagDeleteEmployee = flagDeleteEmployee;
     }
 }

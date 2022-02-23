@@ -5,11 +5,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import vn.codegym.model.User;
 import vn.codegym.repository.UserRepository;
 
 
 @Service
+@Transactional
 public class MyUserDetailService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
@@ -21,4 +23,5 @@ public class MyUserDetailService implements UserDetailsService {
         }
         return new MyUserDetail(user);
     }
+
 }
