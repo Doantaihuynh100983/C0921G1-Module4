@@ -130,6 +130,12 @@ public class ContractDto implements Validator {
             System.out.println(getDaysDiff);
         }
 
+
+
+
+
+
+
             if (contractDto.getContractDeposit() != null){
                 if (contractDto.getContractDeposit() <=0){
                     errors.rejectValue("contractDeposit", "contractDeposit", "Contract Deposit more than 0");
