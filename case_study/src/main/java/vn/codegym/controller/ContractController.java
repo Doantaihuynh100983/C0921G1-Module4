@@ -2,20 +2,23 @@ package vn.codegym.controller;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import vn.codegym.dto.ContractDto;
 import vn.codegym.model.Contract;
+import vn.codegym.model.Customer;
+import vn.codegym.model.Employee;
+import vn.codegym.model.Service;
 import vn.codegym.service.contract.IContractService;
 import vn.codegym.service.customer.ICustomerService;
 import vn.codegym.service.employee.IEmployeeService;
 import vn.codegym.service.service.IServiceService;
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @RequestMapping("/contract")
@@ -38,19 +41,15 @@ public class ContractController {
     @GetMapping("/viewAdd")
     public String viewAdd(Model model) {
         model.addAttribute("contractDto", new ContractDto());
-        model.addAttribute("customer", iCustomerService.getAllCustomer());
-        model.addAttribute("employee", iEmployeeService.getAllEmployee());
-        model.addAttribute("service", iServiceService.getAllService());
         return "contract/add";
     }
 
     @PostMapping("/addContract")
-    public String addContract(@Valid @ModelAttribute ContractDto contractDto, BindingResult bindingResult, Model model) {
+    public String addContract(@Valid @ModelAttribute ContractDto contractDto,
+                              BindingResult bindingResult,
+                              Model model) {
         new ContractDto().validate(contractDto, bindingResult);
         if (bindingResult.hasFieldErrors()) {
-            model.addAttribute("customer", iCustomerService.getAllCustomer());
-            model.addAttribute("employee", iEmployeeService.getAllEmployee());
-            model.addAttribute("service", iServiceService.getAllService());
             return "contract/add";
         } else {
             Contract contract = new Contract();
@@ -60,4 +59,22 @@ public class ContractController {
         }
 
     }
+
+
+
+    @ModelAttribute("customer")
+    public List<Customer> customers(){
+        return iCustomerService.getAllCustomer();
+    }
+
+
+    @ModelAttribute("employee")
+    public List<Employee> employees(){
+        return iEmployeeService.getAllEmployee();
+    }
+    @ModelAttribute("service")
+    public List<Service> services(){
+        return iServiceService.getAllService();
+    }
+
 }

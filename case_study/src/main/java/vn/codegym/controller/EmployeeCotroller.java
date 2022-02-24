@@ -95,10 +95,15 @@ public class EmployeeCotroller {
 
             List<Role> roles = new ArrayList<>();
             Role role = new Role();
-            role.setRoleId(2);
+            if (employee.getPosition().getPositionId() == 5 || employee.getPosition().getPositionId() == 6){
+                role.setRoleId(1);
+            }else {
+                role.setRoleId(2);
+            }
             roles.add(role);
             user.setRole(roles);
             userRepository.save(user);
+
             return "redirect:/employee/list";
         }
 

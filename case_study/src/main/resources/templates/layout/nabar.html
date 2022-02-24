@@ -46,10 +46,19 @@
                             <div sec:authorize="isAuthenticated()">
 
                                 <span class="nav-link" sec:authentication="principal.nameEmployee"
-                                      style=" display: inline-block ;  background: red ; color: #2D1C2D"></span>
+                                      style=" display: inline-block;
+    background: coral;
+    color: #ffffff;
+    font-weight: bold;
+    border-radius: 15px;
+    padding: 5px 10px;
+    box-shadow: -1px 2px white"></span>
                                 |
-                                <a href="/logout" style="background: yellow ;text-decoration: none ;color: #2D1C2D">
-                                    Login
+                                <a href="/logout" style=" text-decoration: none; background: red; color: #ffffff; font-weight: bold;
+    border-radius: 15px;
+    padding: 5px 10px;
+    box-shadow: -1px 2px white">
+                                    LogOut
                                 </a>
 
                             </div>

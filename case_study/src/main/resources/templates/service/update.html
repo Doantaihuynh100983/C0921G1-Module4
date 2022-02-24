@@ -147,7 +147,7 @@
                                                             *</label>
                                                             <select id="rentType" class="form-control"
                                                                     required="required" th:field="*{rentType}">
-                                                                <option th:each="rt : ${rentType}"
+                                                                <option th:each="rt : ${rentTypeList}"
                                                                         th:text="${rt.rentTypeName}"
                                                                         th:value="${rt.rentTypeId}"></option>
                                                             </select>

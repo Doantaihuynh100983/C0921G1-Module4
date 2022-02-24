@@ -21,7 +21,8 @@
                     <br>
                     <div class="d-flex bd-highlight">
                         <div class="p-2 flex-grow-1 bd-highlight">
-                            <a type="button" class="btn btn-outline-primary"  href="/service/viewAdd">THÊM MỚI DỊCH VỤ</a>
+                            <a type="button" class="btn btn-outline-primary" href="/service/viewAdd">THÊM MỚI DỊCH
+                                VỤ</a>
                         </div>
                         <form action="/service/list">
 
@@ -33,7 +34,7 @@
                                 <div class="p-2 flex-fill bd-highlight">
                                     <select id="rentType" style="width:100px;height: 38px" name="rentType">
                                         <option selected disabled>Loại Thuê</option>
-                                        <option th:each="rt : ${rentType}" th:text="${rt.rentTypeName}"
+                                        <option th:each="rt : ${rentTypeList}" th:text="${rt.rentTypeName}"
                                                 th:value="${rt.rentTypeId}"></option>
                                     </select>
                                 </div>
@@ -44,7 +45,6 @@
                                                 th:value="${svt.serviceTypeId}"></option>
                                     </select>
                                 </div>
-
 
 
                                 <div class="p-2 flex-fill bd-highlight">
@@ -83,7 +83,8 @@
                             </button>
                             <input type="hidden" th:value="${sr.serviceId}">
 
-                            <a type="button" class="btn btn-primary"   th:href="@{/service/viewUpdate/__${sr.serviceId}__}">
+                            <a type="button" class="btn btn-primary"
+                               th:href="@{/service/viewUpdate/__${sr.serviceId}__}">
                                 <i class="far fa-edit"></i>
                             </a>
 
@@ -121,8 +122,35 @@
                         </th>
                     </tr>
                     </tbody>
+
                 </table>
+                <nav aria-label="...">
+                    <ul class="pagination">
+                        <li class="page-item ">
+                            <a class="page-link" th:href="@{'/service/list'(page = ${service.number - 1},
+                           serviceName = ${serviceName} ,
+                           rentType = ${rentType},
+                            serviceType = ${serviceType}
+                         )}"
+                               th:if="${service.hasPrevious()}"
+                               tabindex="-1" aria-disabled="true">Previous</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link"> <span th:text="${service.number + 1 }"> </span> / <span
+                                    th:text="${service.totalPages}"> </span></a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" th:href="@{'/service/list'(page = ${service.number + 1},
+
+                           serviceName = ${serviceName} ,
+                           rentType = ${rentType},
+                            serviceType = ${serviceType}  )}"
+                               th:if="${service.hasNext()}">Next</a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
+
         </div>
     </div>
 </div>

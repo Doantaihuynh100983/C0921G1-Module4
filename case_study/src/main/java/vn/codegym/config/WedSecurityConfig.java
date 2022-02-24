@@ -36,8 +36,11 @@ public class WedSecurityConfig extends WebSecurityConfigurerAdapter {
                .loginPage("/login")
                .defaultSuccessUrl("/customer/list").permitAll()
                .and().authorizeRequests()
-               .antMatchers("/customer/**").hasAnyRole("EMPLOYEE","ADMIN")
-               .antMatchers("/service/**").hasAnyRole("EMPLOYEE","ADMIN")
+               .antMatchers("/customer/list","/","/**/*.js", "/**/*.css", "/**/*.jpg","/**/*.map", "/**/*.gif","/**/*.jpeg","/**/*.png").permitAll() /*không cần xác thực.*/
+               .antMatchers("/customer/**", "/error").hasAnyRole("EMPLOYEE","ADMIN")
+               .antMatchers("/service/**", "/error").hasAnyRole("EMPLOYEE","ADMIN")
+               .antMatchers("/contract/**", "/error").hasAnyRole("EMPLOYEE","ADMIN")
+               .antMatchers("/contractDetail/**", "/error").hasAnyRole("EMPLOYEE","ADMIN")
                .antMatchers("/**").hasRole("ADMIN")
                .anyRequest().authenticated();
         /*Cấu hình remember me*/

@@ -35,6 +35,9 @@ public class ServiceController {
                                 @RequestParam(defaultValue = "") String serviceType,
                                 @PageableDefault(value = 5) Pageable pageable) {
             model.addAttribute("service", iServiceService.searchService(serviceName,rentType,serviceType,pageable));
+            model.addAttribute("serviceName",serviceName);
+            model.addAttribute("rentType",rentType);
+            model.addAttribute("serviceType",serviceType);
 //        model.addAttribute("service", iServiceService.getAllService());
         return "service/list";
     }
@@ -96,7 +99,7 @@ public class ServiceController {
         return "redirect:/service/list";
     }
 
-    @ModelAttribute("rentType")
+    @ModelAttribute("rentTypeList")
     public List<RentType> getAllRentType() {
         return iRentTypeService.getAllRentType();
     }
@@ -105,7 +108,4 @@ public class ServiceController {
     public List<ServiceType> getAllServiceTypeService() {
         return iServiceTypeService.getAllServiceType();
     }
-
-
-    //đang làm phân trang
 }
