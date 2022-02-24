@@ -15,8 +15,4 @@ public class HomeController {
     public String login(){
         return "login";
     }
-//    @ExceptionHandler(value = Exception.class)
-//    public String getErrosPage(){
-//        return "404";
-//    }
 }

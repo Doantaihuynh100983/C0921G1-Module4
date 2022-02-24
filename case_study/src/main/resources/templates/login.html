@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <!-- Design by foolishdeveloper.com -->
     <title>Glassmorphism login Form Tutorial in html css</title>
@@ -147,6 +147,7 @@
 
     <label for="password">Password</label>
     <input type="password" placeholder="Password" id="password" name="password">
+    <p th:if="${param.error}" style="color:  red">Incorrect account or password !!!</p>
         <div>
             <span for="remember" style="width: 80% ; position: relative;top: -6px;">Remember-me</span>
             <input  id="remember" type="checkbox" name="remember-me" style="width: 20px ; height: 20px ; display: inline-block">

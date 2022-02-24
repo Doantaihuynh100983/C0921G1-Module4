@@ -105,8 +105,13 @@
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                     aria-label="Close"></button>
                                         </div>
-                                        <div class="modal-body" th:text="${sr.serviceId}">
-
+                                        <div class="modal-body">
+                                            <span>Tên :</span> <span th:text="${sr.serviceName}"></span>
+                                            <br>
+                                            <span>Loại Dịch Vụ :</span> <span th:text="${sr.serviceType.serviceTypeName}"></span>
+                                            <br>
+                                            <span>Loại Thuê:</span> <span th:text="${sr.rentType.rentTypeName}"></span>
+                                            <br>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
